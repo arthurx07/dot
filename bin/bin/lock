@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Suspend dunst and lock, then resume dunst when unlocked.
+pkill -u $USER -USR1 dunst
+i3lock-fancy-rapid 5 5 -e -u
+pkill -u $USER -USR2 dunst

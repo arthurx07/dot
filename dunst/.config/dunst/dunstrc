@@ -1,0 +1,45 @@
+[global]
+    origin = top-right
+    offset = 30x60
+
+    transparency = 10
+    frame_color = "#70635B"
+    frame_width = "1"
+    corner_radius = 10
+
+    separator_color = "#0d0c0d"
+    separator_height = 1
+
+    sort = yes
+    idle_threshold = 500
+
+    font = RobotoMono Nerd Font 9
+    stack_duplicates = true
+    hide_duplicate_count = true
+    show_indicators = yes
+
+    mouse_left_click = close_current
+    mouse_right_click = do_action, close_current
+    mouse_middle_click = close_all
+
+    sticky_history = yes
+    history_length = 20
+
+    monitor = 0
+
+[urgency_low]
+    foreground = "#dbd0c5"
+    background = "#0B0707"
+    ;timeout = 10
+
+[urgency_normal]
+    foreground = "#dbd0c5"
+    background = "#0B0707"
+
+[urgency_critical]
+    background = "#0B0707"
+    foreground = "#dbd0c5"
+    frame_color = "#70635B"
+    timeout = 10
+
+# vim: ft=cfg

@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+if [ $# -eq 1 ]; then
+    amixer -q set Master $1
+    VOLUME=`$HOME/.local/bin/pamixer/build/pamixer --get-volume`
+    
+    if [[ $(echo -e $1) =~ "+" ]]; then
+    dunstify -h string:x-dunst-stack-tag:volume "   $VOLUME%" -t 2000
+    elif [[ $(echo -e $1) =~ "-" ]]; then
+    dunstify -h string:x-dunst-stack-tag:volume "   $VOLUME%" -t 2000
+    fi
+fi

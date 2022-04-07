@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ $(playerctl status -p spotify) == Playing ]]; then
+    polybar-msg hook spotify-play-pause 1
+fi
+
+if [[ $(playerctl status -p spotify) == Paused ]]; then
+    polybar-msg hook spotify-play-pause 2
+fi

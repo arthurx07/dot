@@ -1,0 +1,32 @@
+#------------------------------------------------------------------------------
+# Project Name      - i3config-rules
+# Started On        - Fri 31 Dec 23:59:59 CET 2021
+# Last Change       - Wed 29 Mar 20:52:51 CET 2022
+# Author E-Mail     - arturleivarx@gmail.com
+# Author GitHub     - https://github.com/arthurx07
+#------------------------------------------------------------------------------
+# Important `for_window` rules to allow certain programs to display properly.
+# To use this file, simply `include` its contents in your 'config'. IE:
+#
+#   include ~/.config/i3/rules
+#
+#------------------------------------------------------------------------------
+
+for_window [window_role="popup"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog" ] floating enable
+for_window [class=".*"] border pixel 0
+for_window [floating workspace="^[1,2,3,5,10]$"] resize set 2240 1260, move position center
+for_window [floating workspace="^[4,6,7,8,9,11]$"] resize set 1600 900, move position center
+for_window [class="^Links$" title="^Links$"] floating disable
+for_window [title="^Event Tester$" id="0x1000001"] floating enable
+
+for_window [class="^Lxappearance$"] floating enable
+for_window [class="^Pavucontrol$"] floating enable
+for_window [class="^imv$"] floating enable
+for_window [class="^mpv$"] floating enable
+for_window [title="^Tachidesk$"] move container to workspace $ws3
+for_window [class="^[Ss]potify$"] move container to workspace $ws9
+for_window [class="^qutebrowser$" title="^.*WhatsApp.*$"] floating enable, resize set 1440 900
+for_window [class="^qutebrowser$" title="^.*YouTube.*$" floating workspace=11] resize set 1760 990, move position 90 70
+for_window [class="^[Mm]inecraft.*$"] move container to workspace $ws5

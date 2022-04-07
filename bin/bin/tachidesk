@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# old xd cd /usr/bin/TachideskServer/work/Tachidesk-Server-v0.5.4-r995-linux-x64 && ./jre/bin/java "-Dsuwayomi.tachidesk.config.server.webUIInterface=electron" "-Dsuwayomi.tachidesk.config.server.electronPath=electron/electron" -jar Tachidesk.jar >/dev/null
+/usr/bin/TachideskServer/work/Tachidesk-Server-v0.5.4-r995-linux-x64/jre/bin/java "-Dsuwayomi.tachidesk.config.server.webUIInterface=electron" "-Dsuwayomi.tachidesk.config.server.electronPath=/usr/bin/TachideskServer/work/Tachidesk-Server-v0.5.4-r995-linux-x64/electron/electron" -jar /usr/bin/TachideskServer/work/Tachidesk-Server-v0.5.4-r995-linux-x64/Tachidesk.jar >/dev/null
