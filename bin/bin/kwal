@@ -9,7 +9,7 @@
         FILE=$1
         fi
     else
-        FILE=`find $HOME/.backgrounds/desktop -type f | shuf -n 1`
+        FILE=`find $HOME/wal/ -type f | shuf -n 1`
     fi
 
     if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)" ]]; then

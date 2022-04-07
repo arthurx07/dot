@@ -1,0 +1,1 @@
+--ignore='^{.git/,LICENSE,README.md,clean-env.sh,install.sh}$'
