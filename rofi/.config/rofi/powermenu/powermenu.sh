@@ -73,7 +73,7 @@ case $chosen in
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
 			mpc -q pause
 			amixer set Master mute
-            $HOME/.local/bin/lock
+            $HOME/bin/lock
 			#systemctl suspend
 			loginctl suspend
 			playerctl stop

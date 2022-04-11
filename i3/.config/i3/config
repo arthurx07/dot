@@ -59,14 +59,14 @@ set $ws11 "11"
 
 # autostart
 exec i3-msg restart
-exec --no-startup-id $HOME/.local/bin/xrandr-conf
+exec_always --no-startup-id $HOME/bin/xrandr-conf
 exec_always --no-startup-id pgrep "picom" > /dev/null && killall picom && "picom &" || sleep 0.1 && picom &
 exec --no-startup-id dunstwal -b
 exec --no-startup-id setxkbmap us intl &
 exec --no-startup-id udiskie &
 #exec --no-startup-id "$HOME/bin/kwal"
-exec --no-startup-id "$HOME/bin/kwal $HOME/.backgrounds/desktop/zelda\(13\).jpg"
-exec --no-startup-id xautolock -detectsleep -time 5 -locker '$HOME/.local/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
+exec --no-startup-id "$HOME/bin/kwal $HOME/wal/4.jpg"
+exec --no-startup-id xautolock -detectsleep -time 5 -locker '$HOME/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
 exec --no-startup-id dex --autostart --environment i3
 
 # autostart -- set in workspace

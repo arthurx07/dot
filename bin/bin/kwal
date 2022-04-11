@@ -29,7 +29,7 @@
 # with wpgtk
             $HOME/.local/bin/wpg -a "$FILE" && $HOME/.local/bin/wpg -s "$($HOME/.local/bin/wpg -l | grep "")" && $HOME/.local/bin/wpg -d "$($HOME/.local/bin/wpg -l | grep "")"
 
-            $HOME/.color-toys/panes
+            $HOME/bin/panes
 
             #rm "$FILE""-t" "$FILE""-tt" "$FILE""-ttt"
             echo -e "\n"
@@ -44,7 +44,7 @@
             #$HOME/.local/bin/pywal-discord/pywal-discord
             #echo -e "[ Colorscheme applied to discord ]\n"
 
-            $HOME/.local/bin/dunstwal
+            $HOME/bin/dunstwal
             echo -e "[ Colorscheme applied to dunst ]\n"
 
             echo -e "\e[1;32mCommand successful!\e[0m\n"

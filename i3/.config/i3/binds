@@ -33,8 +33,8 @@ set $poweroff $HOME/.config/rofi/powermenu/powermenu.sh
 
 #----------------------------------------------------------------------Programs
 # wallpaper
-bindsym $mod+Shift+b exec --no-startup-id "$HOME/.local/bin/kwal"
-bindsym $mod+Shift+ctrl+b exec --no-startup-id "$HOME/.local/bin/kwal $HOME/.backgrounds/desktop/cyberpunk.jpg"
+bindsym $mod+Shift+b exec --no-startup-id "$HOME/bin/kwal"
+bindsym $mod+Shift+ctrl+b exec --no-startup-id "$HOME/bin/kwal $HOME/.backgrounds/desktop/cyberpunk.jpg"
 
 # i3
 bindsym $mod+Shift+c reload
@@ -56,20 +56,20 @@ bindsym $mod+p exec --no-startup-id $poweroff
 bindsym $mod+b exec --no-startup-id $browser &
 # browser
 bindsym $mod+ctrl+b exec --no-startup-id prime-run $browser &
-bindsym $mod+ctrl+2 exec --no-startup-id "$HOME/.local/bin/qb2 && sleep 1 && kitty -e nvim"
-bindsym $mod+ctrl+3 exec --no-startup-id "$HOME/.local/bin/qb3"
-bindsym $mod+ctrl+0 exec --no-startup-id "$HOME/.local/bin/qb10"
+bindsym $mod+ctrl+2 exec --no-startup-id "$HOME/bin/qb2 && sleep 1 && kitty -e nvim"
+bindsym $mod+ctrl+3 exec --no-startup-id "$HOME/bin/qb3"
+bindsym $mod+ctrl+0 exec --no-startup-id "$HOME/bin/qb10"
 # extras
 bindsym $mod+s exec --no-startup-id $mplayer &
 bindsym $mod+w exec --no-startup-id "$term -e $fm"
 bindsym $mod+a exec --no-startup-id "$term -e $ani &"
-bindsym $mod+m exec --no-startup-id "$term -e sleep 0.0001 && $HOME/.local/bin/tachidesk"
+bindsym $mod+m exec --no-startup-id "$term -e sleep 0.0001 && $HOME/bin/tachidesk"
 bindsym $mod+d exec --no-startup-id "/opt/discord/Discord/Discord"
 bindsym $mod+Escape exec --no-startup-id flameshot gui
-#bindsym $mod+ctrl+minus exec --no-startup-id "$HOME/.local/bin/mpyt"
-bindsym $mod+ctrl+minus exec --no-startup-id "$HOME/.local/bin/qb11"
+#bindsym $mod+ctrl+minus exec --no-startup-id "$HOME/bin/mpyt"
+bindsym $mod+ctrl+minus exec --no-startup-id "$HOME//bin/qb11"
 # gentoo update
-bindsym $mod+g exec --no-startup-id "i3-msg workspace 4; exec --no-startup-id kitty -e $HOME/.local/bin/gentoo-sys-update"
+bindsym $mod+g exec --no-startup-id "i3-msg workspace 4; exec --no-startup-id kitty -e $HOME/bin/gentoo-sys-update"
 
 #------------------------------------------------------------------Window Focus
 
@@ -178,17 +178,17 @@ bindsym $mod+r mode "resize"
 #--------------------------------------------------------------------Media Keys
 
 # backlight
-bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/.local/bin/light +10% 
-bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/.local/bin/light 10%- 
+bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/bin/light +10% 
+bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/bin/light 10%- 
 
 # player
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioPlay exec --no-startup-id $HOME/.local/bin/play-pause 
+bindsym XF86AudioPlay exec --no-startup-id $HOME/bin/play-pause 
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 
 # audio
-bindsym XF86AudioMute exec --no-startup-id $HOME/.local/bin/muted
-bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.local/bin/volume 5%-
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id $HOME/.local/bin/volume 1%-
-bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.local/bin/volume 5%+
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id $HOME/.local/bin/volume 1%+
+bindsym XF86AudioMute exec --no-startup-id $HOME/bin/muted
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume 5%-
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume 1%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume 5%+
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume 1%+
