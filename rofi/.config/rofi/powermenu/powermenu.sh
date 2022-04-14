@@ -63,7 +63,8 @@ case $chosen in
     $lock)
 		if [[ -f /usr/bin/i3lock ]]; then
 			#i3lock
-            i3lock-fancy-rapid 5 5 -e -u
+            #i3lock-fancy-rapid 5 5 -e -u
+            slimlock
 		elif [[ -f /usr/bin/betterlockscreen ]]; then
 			betterlockscreen -l
 		fi
@@ -73,10 +74,10 @@ case $chosen in
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
 			mpc -q pause
 			amixer set Master mute
-            $HOME/bin/lock
-			#systemctl suspend
-			loginctl suspend
 			playerctl stop
+			#systemctl suspend
+            $HOME/bin/lock --i3lock
+            loginctl suspend
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else

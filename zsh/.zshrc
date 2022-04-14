@@ -167,7 +167,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 PRIV="$(command -v doas)"
 
 alias c="clear"
-alias q="exit"
+#alias q="exit"
 alias :q="exit"
 alias hd="hexdump -C"
 alias ls="exa -lgh --group-directories-first"
@@ -203,6 +203,11 @@ alias manga="tachidesk"
 alias m="tachidesk"
 alias s="$HOME/.local/bin/spotify-tui/spt"
 
+alias emerge-sync="${PRIV} eix-sync"
+alias emerge-upgrade="${PRIV} emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y --quiet @world && smart-live-rebuild"
+alias emerge-install="${PRIV} emerge -avtq"
+alias emerge-depclean="${PRIV} emerge -av --depclean"
+
 alias emerge_install="${PRIV} emerge -avt"
 alias emerge_install_unmask="${PRIV} emerge -avt --autounmask=y --autounmask-write"
 alias emerge_pretend="${PRIV} emerge -pv"
@@ -212,6 +217,7 @@ alias emerge_new_use="${PRIV} emerge -avt --update --newuse --deep @world"
 alias emerge_depclean="${PRIV} emerge -av --depclean"
 alias eclean_dist="${PRIV} eclean-dist --deep"
 alias eclean_pkg="${PRIV} eclean-pkg --deep"
+
 alias rc-service="${PRIV} rc-service"
 alias rc-update="${PRIV} rc-update"
 alias clean_ram="${PRIV} sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'"

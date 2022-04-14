@@ -1,2 +1,2 @@
 #!/bin/bash
-doas eix-sync && doas emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y @world && doas emerge --depclean --verbose
+doas eix-sync && doas emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y @world && doas smart-live-rebuild && doas emerge --depclean --verbose

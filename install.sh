@@ -1,7 +1,6 @@
 #!/bin/bash
-folders=`ls -d $HOME/dot/*/ | awk '{print $8}'`
 
-for i in $(ls -d */)
+for i in $(ls -d $HOME/dot/*/ | awk '{gsub("/home/kumao/dot/", "");print}' | awk '{gsub("gentoo/", "");print}')
 do
     stow -D $i
     stow $i

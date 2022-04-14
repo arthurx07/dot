@@ -1,49 +1,35 @@
 #!/bin/env bash
-
-LIGHT=`cat /sys/class/backlight/intel_backlight/brightness`
-echo -e "\n[ Current light is $LIGHT ]\n"
+LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
+echo -e "\n[ Current light value is $LIGHT ]\n"
 
 if [ $# -eq 1 ]; then
-    if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
-    # only eDP-1 connected 
-        # +10% to brightness up
-        $HOME/.local/bin/brightnessctl-bin s $1
-        NLIGHT=`cat /sys/class/backlight/intel_backlight/brightness`
-        NPERC=`echo $(( 100*LIGHT/26666 ))`
+    if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then # only eDP-1 connected 
+        brightnessctl s $1
+
+        LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
    
-    elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then
-    # both eDP-1 and HDMI-1-0 connected
+    elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then # both eDP-1 and HDMI-1-0 connected
+
         #internal monitor
-        $HOME/.local/bin/brightnessctl-bin s $1
+        brightnessctl s $1
+        LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
 
         # external monitor
-        if [[ $1 == "+10%" ]];then
-        ddcutil setvcp --bus=12 10 + 10
-        elif [[ $1 == "10%-" ]]; then
-        ddcutil setvcp --bus=12 10 - 10
-        fi
+        ddcutil setvcp --bus=12 10 $LIGHT
 
-        NLIGHT=`cat /sys/class/backlight/intel_backlight/brightness`
-        NPERC=`echo $(( (100*$NLIGHT/26666)+1 ))`
-        NPERC2=`echo $(( (100*$NLIGHT/26666) ))`
     fi
 
-    if [[ $(echo -e $NLIGHT) == "26666" ]]; then
-        echo -e "[ Set light to 100% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   100% " -t 2000
-    elif [[ $(echo -e $1)  =~ "+" ]]; then
+    if [[ $(echo -e $1)  =~ "+" ]]; then
         echo -e "[ Set light to $NPERC% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   $NPERC2%" -t 2000
-    elif [[ $(echo -e $NLIGHT) == "0" ]]; then
-        echo -e "[ Set light to 0% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   0% " -t 2000
+        dunstify -h string:x-dunst-stack-tag:light "   $LIGHT%" -t 2000
     elif [[ $(echo -e $1)  =~ "-" ]]; then
         echo -e "[ Set light to $NPERC% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   $NPERC%" -t 2000
+        dunstify -h string:x-dunst-stack-tag:light "   $LIGHT%" -t 2000
     fi
-    
 
-elif [ $# -ne 1 ]; then
+echo -e "\n[ New light value is $LIGHT ]\n"
+
+else
     echo -e "Valid Values: "
     echo -e "   specific value              Example: 500"
     echo -e "   percentage value            Example: 50%"

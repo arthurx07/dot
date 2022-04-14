@@ -1,82 +1,52 @@
 #!/bin/bash
-    if [ $# -ge 1 ]; then
-        if [ $1 == dwall ]; then
-        /home/kumao/.local/bin/dynamic-wallpaper/dwall.sh -p -s $2
-        sleep 1
-        BACKGROUND=`cat /home/kumao/.fehbg | tail -1 | cut -d' ' -f4- | sed -r 's/(.*)-ttt(.*)/\1\2/' | sed -E 's/^ |["'\'']| $//g' `
-        FILE=$BACKGROUND
-        else
-        FILE=$1
-        fi
-    else
-        FILE=`find $HOME/wal/ -type f | shuf -n 1`
+
+wpg="$HOME/.local/bin/wpg"
+wpg() {
+    if [[ -n $($wpg -l) ]]; then 
+        for i in $($wpg -l); do
+            $wpg -d $i    # to prevent errors
+        done
     fi
 
-    if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)" ]]; then
-        if [ -f "$FILE" ]; then
-            convert "$FILE" -resize 1920x1080 "$FILE""-t"
-            echo "[ Image resized to 1080p ]"
+    $wpg -a "$file" &>/dev/null && \
+        $wpg -s "$($wpg -l)" &>/dev/null && \
+        $wpg -d "$($wpg -l)"
+    feh --bg-scale "$HOME/.kwal.tmp"
+}
 
-            convert "$FILE" -resize 2560x1440 "$FILE""-tt"
-            echo "[ Image resized to 1440p ]"
-            
-            convert "$FILE""-t" "$FILE""-tt" "+append" "$FILE""-ttt"
-            echo "[ +append successful ]"
-
-
-# with pywal $HOME/.local/bin/wal -i "$FILE" -n
-
-# with wpgtk
-            $HOME/.local/bin/wpg -a "$FILE" && $HOME/.local/bin/wpg -s "$($HOME/.local/bin/wpg -l | grep "")" && $HOME/.local/bin/wpg -d "$($HOME/.local/bin/wpg -l | grep "")"
-
-            $HOME/bin/panes
-
-            #rm "$FILE""-t" "$FILE""-tt" "$FILE""-ttt"
-            echo -e "\n"
-            echo -e "[ Files created are now deleted ]\n"
-                if pgrep "spotify" > /dev/null; then
-                    $HOME/.local/bin/spicetify apply &> /dev/null && killall spotify &> /dev/null && nohup spotify &> /dev/null & disown &> /dev/null | grep -q ""
-                else
-                    $HOME/.local/bin/spicetify apply &> /dev/null && killall spotify &> /dev/null
-                fi
-            echo -e "[ Colorscheme applied to spotify ]\n"
-
-            #$HOME/.local/bin/pywal-discord/pywal-discord
-            #echo -e "[ Colorscheme applied to discord ]\n"
-
-            $HOME/bin/dunstwal
-            echo -e "[ Colorscheme applied to dunst ]\n"
-
-            echo -e "\e[1;32mCommand successful!\e[0m\n"
-            echo -e "\e[1;34mEnjoy your new background!\e[0m \e[1;31m:)\e[0m\n"
-            echo -e "The background is located at $FILE\n"
-
-            if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
-                feh --bg-scale "$FILE""-t"
-            elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then
-                feh --bg-scale "$FILE""-ttt"
-            fi
-
-            rm "$FILE""-t" "$FILE""-tt" "$FILE""-ttt"
-            
-            if pgrep "polybar" > /dev/null; then
-                sleep 0
-            else
-                $HOME/.config/polybar/launch &> /dev/null
-            fi
-
-            exit 0
-        else
-            echo -e "\n"
-            echo -e "\e[1,33m[!]\e[0m Error: File does not exist\n"
-            echo -e "[!] Please enter the path to wallpaper.\n"
-            echo "Usage : kwal path/to/image"
-            exit 1
-        fi
-    else
-        echo -e "\n"
-        echo -e "\e[1,33m[!]\e[0m Error: File does not exist\n"
-        echo -e "[!] Please enter the path to wallpaper."
-        echo "Usage : kwal path/to/image"
+if [ $# -lt 1 ];then
+    file=`find $HOME/wal/ -type f | grep -v "animevibe" | shuf -n 1`
+else
+    file=$1
+    if [ ! -f "$file" ]; then
+        echo -e "Usage : kwal path/to/image"
         exit 1
     fi
+fi
+
+if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)"  && -x "$(command -v $wpg)" ]]; then
+    if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
+        convert "$file" -resize 1920x1080 "$HOME/.kwal.tmp"
+        wpg
+    elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]]; then
+        convert "$file" -resize 1920x1080 "$HOME/.kwal1.tmp"
+        convert "$file" -resize 2560x1440 "$HOME/.kwal2.tmp"
+        convert "$HOME/.kwal[1,2].tmp" +append "$HOME/.kwal.tmp" && rm $HOME/.kwal[1,2].tmp
+        wpg
+    fi
+    
+    rm $HOME/.kwal*.tmp && $HOME/bin/panes && $HOME/bin/dunstwal 2>/dev/null && qutebrowser :config-source &>/dev/null
+
+    if [[ -z $(pgrep polybar) ]]; then
+        $HOME/.config/polybar/launch
+    fi
+
+    if [[ -z $(pgrep spotify) ]]; then
+        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify
+    else
+        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec spotify' >/dev/null
+    fi 
+    exit 0
+else
+    echo -e "Error: Either wal, wpg or imagemagick not installed"
+fi

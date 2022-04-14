@@ -285,6 +285,7 @@ c.statusbar.show = 'never'
 # Type: Dict
 c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}',
     'gw': 'https://wiki.gentoo.org/?search={}',
+    'aw': 'https://wiki.archlinux.org/index.php?search={}',
     'yt': 'https://www.youtube.com/results?search_query={}',
     'kt': 'https://kitsu.io/anime?text={}',
     'ktm': 'https://kitsu.io/manga?text={}',

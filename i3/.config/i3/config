@@ -58,18 +58,19 @@ set $ws10 "10"
 set $ws11 "11"
 
 # autostart
-exec i3-msg restart
-exec_always --no-startup-id $HOME/bin/xrandr-conf
+#exec i3-msg restart
+#exec_always --no-startup-id sleep 5 && $HOME/bin/xrandr-conf
 exec_always --no-startup-id pgrep "picom" > /dev/null && killall picom && "picom &" || sleep 0.1 && picom &
-exec --no-startup-id dunstwal -b
-exec --no-startup-id setxkbmap us intl &
 exec --no-startup-id udiskie &
+exec --no-startup-id feh --bg-scale wal/1.jpg
 #exec --no-startup-id "$HOME/bin/kwal"
-exec --no-startup-id "$HOME/bin/kwal $HOME/wal/4.jpg"
+#exec --no-startup-id "$HOME/bin/kwal $HOME/wal/4.jpg"
 exec --no-startup-id xautolock -detectsleep -time 5 -locker '$HOME/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
-exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id gentoo-pipewire-launcher
 
 # autostart -- set in workspace
-exec sleep 0.48 && i3-msg 'workspace 6; exec kitty -e gotop'
-exec sleep 0.49 && i3-msg 'workspace 7; exec kitty -e ranger' && i3-msg 'workspace 4; workspace 1'
-exec --no-startup-id sleep 1 && spotify > /dev/null
+#exec --no-startup-id sleep 0.48 && i3-msg 'workspace 6; exec kitty -e gotop'
+#exec --no-startup-id sleep 0.49 && i3-msg 'workspace 7; exec kitty -e ranger' && i3-msg 'workspace 4; workspace 1'
+exec --no-startup-id sleep 0.1 && i3-msg 'workspace 9; exec --no-startup-id spotify >/dev/null'
+exec --no-startup-id i3-msg 'workspace 6; exec kitty -e gotop'
+exec --no-startup-id i3-msg 'workspace 7; exec kitty -e ranger' && sleep 0.11 && i3-msg 'workspace 4; workspace 1'
