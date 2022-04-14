@@ -35,7 +35,11 @@ if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)"  && 
         wpg
     fi
     
-    rm $HOME/.kwal*.tmp && $HOME/bin/panes && $HOME/bin/dunstwal 2>/dev/null && qutebrowser :config-source &>/dev/null
+    rm $HOME/.kwal*.tmp && $HOME/bin/panes && $HOME/bin/dunstwal 2>/dev/null 
+
+    if [[ -n $(pgrep qutebrowser) ]]; then
+        qutebrowser :config-source &>/dev/null
+    fi
 
     if [[ -z $(pgrep polybar) ]]; then
         $HOME/.config/polybar/launch
@@ -44,7 +48,7 @@ if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)"  && 
     if [[ -z $(pgrep spotify) ]]; then
         $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify
     else
-        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec spotify' >/dev/null
+        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify' >/dev/null
     fi 
     exit 0
 else
