@@ -1,12 +1,12 @@
 #!/bin/env bash
 
-if [ $# -eq 1 ]; then
-    amixer -q set Master $1
-    VOLUME=`amixer get Master | awk 'NR == 7 {print $5}' | tr -d '[%]' `
+if [ $# -le 2 ]; then
+    pamixer $1 $2
+    volume=`pamixer --get-volume-human`
     
-    if [[ $(echo -e $1) =~ "+" ]]; then
-    dunstify -h string:x-dunst-stack-tag:volume "   $VOLUME%" -t 2000
-    elif [[ $(echo -e $1) =~ "-" ]]; then
-    dunstify -h string:x-dunst-stack-tag:volume "   $VOLUME%" -t 2000
+    if [[ $1 -eq "-i" ]]; then
+        dunstify -h string:x-dunst-stack-tag:volume "   $volume" -t 2000
+    elif [[ $1 -eq "-d" ]]; then
+        dunstify -h string:x-dunst-stack-tag:volume "   $volume" -t 2000
     fi
 fi

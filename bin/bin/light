@@ -1,33 +1,22 @@
 #!/bin/env bash
-LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
-echo -e "\n[ Current light value is $LIGHT ]\n"
+light0=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
+echo -e "\n[ Current light value is $light0 ]\n"
 
 if [ $# -eq 1 ]; then
-    if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then # only eDP-1 connected 
-        brightnessctl s $1
+    brightnessctl s $1
+    light=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
 
-        LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
+    if [[ $1  =~ "+" ]]; then
+        dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
+    elif [[ $1  =~ "-" ]]; then
+        dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
+    fi
    
-    elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then # both eDP-1 and HDMI-1-0 connected
-
-        #internal monitor
-        brightnessctl s $1
-        LIGHT=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
-
-        # external monitor
-        ddcutil setvcp --bus=12 10 $LIGHT
-
+    if [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then # both eDP-1 and HDMI-1-0 connected
+        ddcutil setvcp --bus=12 10 $light
     fi
 
-    if [[ $(echo -e $1)  =~ "+" ]]; then
-        echo -e "[ Set light to $NPERC% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   $LIGHT%" -t 2000
-    elif [[ $(echo -e $1)  =~ "-" ]]; then
-        echo -e "[ Set light to $NPERC% ]\n"
-        dunstify -h string:x-dunst-stack-tag:light "   $LIGHT%" -t 2000
-    fi
-
-echo -e "\n[ New light value is $LIGHT ]\n"
+    echo -e "\n[ New light value is $light ]\n"
 
 else
     echo -e "Valid Values: "

@@ -11,7 +11,7 @@ wpg() {
     $wpg -a "$file" &>/dev/null && \
         $wpg -s "$($wpg -l)" &>/dev/null && \
         $wpg -d "$($wpg -l)"
-    feh --bg-scale "$HOME/.kwal.tmp"
+    feh --bg-scale $file
 }
 
 if [ $# -lt 1 ];then
@@ -24,18 +24,25 @@ else
     fi
 fi
 
-if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)"  && -x "$(command -v $wpg)" ]]; then
-    if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
-        convert "$file" -resize 1920x1080 "$HOME/.kwal.tmp"
-        wpg
-    elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]]; then
-        convert "$file" -resize 1920x1080 "$HOME/.kwal1.tmp"
-        convert "$file" -resize 2560x1440 "$HOME/.kwal2.tmp"
-        convert "$HOME/.kwal[1,2].tmp" +append "$HOME/.kwal.tmp" && rm $HOME/.kwal[1,2].tmp
-        wpg
-    fi
+if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v $wpg)" ]]; then
+
+    # for when feh didn't had multihead support
+    #&& -x "$(command -v convert)"  
+    #if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
+    #    convert "$file" -resize 1920x1080 "$HOME/.kwal.tmp"
+    #    wpg
+    #elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]]; then
+    #    convert "$file" -resize 1920x1080 "$HOME/.kwal1.tmp"
+    #    convert "$file" -resize 2560x1440 "$HOME/.kwal2.tmp"
+    #    convert "$HOME/.kwal[1,2].tmp" +append "$HOME/.kwal.tmp" && rm $HOME/.kwal[1,2].tmp
+    #    wpg
+    #fi
+    #feh --bg-scale "$HOME/.kwal.tmp"
+    #rm $HOME/.kwal.tmp && 
+
+    wpg
     
-    rm $HOME/.kwal*.tmp && $HOME/bin/panes && $HOME/bin/dunstwal 2>/dev/null 
+    $HOME/bin/panes && $HOME/bin/dunstwal 2>/dev/null 
 
     if [[ -n $(pgrep qutebrowser) ]]; then
         qutebrowser :config-source &>/dev/null
@@ -52,5 +59,5 @@ if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v convert)"  && 
     fi 
     exit 0
 else
-    echo -e "Error: Either wal, wpg or imagemagick not installed"
+    echo -e "Error: Either wal or wpg not installed"
 fi

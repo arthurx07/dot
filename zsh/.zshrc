@@ -204,7 +204,7 @@ alias m="tachidesk"
 alias s="$HOME/.local/bin/spotify-tui/spt"
 
 alias emerge-sync="${PRIV} eix-sync"
-alias emerge-upgrade="${PRIV} emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y --quiet @world && smart-live-rebuild"
+alias emerge-upgrade="${PRIV} emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y --quiet @world && ${PRIV} smart-live-rebuild"
 alias emerge-install="${PRIV} emerge -avtq"
 alias emerge-depclean="${PRIV} emerge -av --depclean"
 

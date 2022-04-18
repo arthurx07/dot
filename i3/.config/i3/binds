@@ -23,7 +23,7 @@ set $browser qutebrowser
 set $music spotify
 set $fm ranger
 set $ani ani-cli
-set $manga tachidesk
+set $manga tachidesk-server
 
 # launcher
 set $menu $HOME/.config/rofi/launchers/launcher.sh
@@ -63,7 +63,7 @@ bindsym $mod+ctrl+0 exec --no-startup-id "$HOME/bin/qb10"
 bindsym $mod+s exec --no-startup-id $mplayer &
 bindsym $mod+w exec --no-startup-id "$term -e $fm"
 bindsym $mod+a exec --no-startup-id "$term -e $ani &"
-bindsym $mod+m exec --no-startup-id "$term -e sleep 0.0001 && $HOME/bin/tachidesk"
+bindsym $mod+m exec --no-startup-id "$manga"
 bindsym $mod+d exec --no-startup-id "/opt/discord/Discord/Discord"
 bindsym --release $mod+Escape exec --no-startup-id flameshot gui
 #bindsym $mod+ctrl+minus exec --no-startup-id "$HOME/bin/mpyt"
@@ -178,17 +178,17 @@ bindsym $mod+r mode "resize"
 #--------------------------------------------------------------------Media Keys
 
 # backlight
-bindsym --release XF86MonBrightnessUp exec --no-startup-id $HOME/bin/light +10% 
-bindsym --release XF86MonBrightnessDown exec --no-startup-id $HOME/bin/light 10%- 
+bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/bin/light +10% 
+bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/bin/light 10%- 
 
 # player
-bindsym --release XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym --release XF86AudioPlay exec --no-startup-id $HOME/bin/play-pause 
-bindsym --release XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id $HOME/bin/play-pause 
+bindsym XF86AudioNext exec --no-startup-id playerctl next
 
 # audio
-bindsym --release XF86AudioMute exec --no-startup-id $HOME/bin/muted
-bindsym --release XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume 5%-
-bindsym --release $mod+XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume 1%-
-bindsym --release XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume 5%+
-bindsym --release $mod+XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume 1%+
+bindsym XF86AudioMute exec --no-startup-id $HOME/bin/muted
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume -d 10
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id $HOME/bin/volume -d 1
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume -i 10
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id $HOME/bin/volume -i 1
