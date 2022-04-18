@@ -5,25 +5,40 @@ EAPI=8
 
 DESCRIPTION="A free and open source manga reader that runs extensions built for Tachiyomi."
 HOMEPAGE="https://github.com/Suwayomi/Tachidesk-Server"
-SRC_URI="https://github.com/Suwayomi/Tachidesk-Server/archive/refs/tags/v$PV.tar.gz -> $P.tar.gz"
+FNAME="Tachidesk-Server-v$PV-r1087-linux-x64"
+SRC_URI="https://github.com/Suwayomi/Tachidesk-Server/releases/download/v$PV/$FNAME.tar.gz -> $PN.tar.gz"
 
 LICENSE="MPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE=""
+IUSE="+electron"
 
-DEPEND="virtual/jre"
-#dev-util/electron
+DEPEND="
+	virtual/jre
+	"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-src_compile() {
-	gradlew server:downloadWebUI server:shadowJar
-}
+S="$WORKDIR/$FNAME/"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-electron.sh.patch"
+)
+
+#src_compile() {
+#	$S/gradlew server:downloadWebUI server:shadowJar
+#}
 
 src_install() {
-	cp /server/build/Tachidesk-Server-v$PV.jar /usr/share/java/$PN/$P.jar
-	#dodir /usr/bin/TachideskServer
-# When I delete dodir /usr/bin/TachideskServer and change "${D}/usr/binTachideskServer to "${D}/usr/local/bin/ it doesn't work idk /y.
-	#cp -R "${S}/" "${D}/usr/bin/TachideskServer" || die "Install failed!"
+	insinto /usr/share/java/$PN/
+	newins Tachidesk-Server.jar $PN.jar
+	exeinto /usr/bin/
+	if use electron; then
+		newexe tachidesk-server-electron-launcher.sh tachidesk-server
+		insinto /usr/share/
+		doins -r electron
+		chmod +x $D/usr/share/electron/{electron,chrome-sandbox}
+	else
+		newexe tachidesk-server-browser-launcher.sh tachidesk-server
+	fi
 }

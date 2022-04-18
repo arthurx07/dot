@@ -5,8 +5,8 @@ EAPI=8
 inherit git-r3
 
 DESCRIPTION="Ly - a TUI display manager"
-HOMEPAGE="https://github.com/fairyglade/ly"
-EGIT_REPO_URI="https://github.com/fairyglade/ly.git"
+HOMEPAGE="https://github.com/pspiagicw/ly-gentoo"
+EGIT_REPO_URI="https://github.com/pspiagicw/ly-gentoo.git"
 
 LICENSE="WTFPL-2"
 SLOT="0"
@@ -19,7 +19,7 @@ DEPEND="
 	x11-libs/libxcb
 	x11-base/xorg-server
 	x11-apps/xauth
-	!x11-misc/ly-gentoo
+	!x11-misc/ly
 "
 RDEPEND="${DEPEND}"
 BDEPEND=""
