@@ -10,7 +10,7 @@ SRC_URI="https://github.com/Suwayomi/Tachidesk-Server/releases/download/v$PV/$FN
 
 LICENSE="MPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64"
 IUSE="+electron"
 
 DEPEND="

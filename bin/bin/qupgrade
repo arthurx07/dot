@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+    doas "$0" "$@"
+    exit $?
+fi
+
+if [[ $1 == "sync" ]]; then
+    eix-sync
+fi
+
+emerge --update --newuse --deep --ask --tree --complete-graph --verbose \
+    --with-bdeps=y @world && \
+    smart-live-rebuild --jobs=4 && \
+    emerge --depclean --verbose --ask

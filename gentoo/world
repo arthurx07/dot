@@ -20,6 +20,7 @@ app-misc/pfetch
 app-misc/piper
 app-misc/ranger
 app-misc/rofi-bluetooth
+app-misc/rofi-pass
 app-misc/tachidesk-server
 app-misc/trash-cli
 app-misc/tty-clock
@@ -29,6 +30,7 @@ app-portage/eix
 app-portage/elogv
 app-portage/genlop
 app-portage/gentoolkit
+app-portage/portpeek
 app-portage/repoman
 app-portage/smart-live-rebuild
 app-portage/ufed
@@ -49,6 +51,7 @@ dev-python/pudb
 dev-qt/qtquickcontrols2
 dev-qt/qtsvg
 dev-util/github-cli
+games-action/minecraft-launcher:0
 games-emulation/retroarch
 games-emulation/yuzu
 games-util/lutris
@@ -73,12 +76,15 @@ media-sound/pamixer
 media-sound/pavucontrol
 media-sound/playerctl
 media-sound/qjackctl
+media-sound/spicetify-cli
+media-sound/spotify
 media-sound/spotify-adblock
-media-sound/spotify::kumao
 media-video/ffmpeg
 media-video/ffmpegthumbnailer
 media-video/mpv
+media-video/obs-studio
 media-video/wireplumber
+net-libs/libproxy
 net-libs/nodejs
 net-misc/dhcpcd
 net-misc/networkmanager
@@ -124,7 +130,6 @@ x11-drivers/nvidia-drivers
 x11-misc/arandr
 x11-misc/dunst
 x11-misc/i3lock-fancy-rapid
-x11-misc/ly
 x11-misc/parcellite
 x11-misc/picom
 x11-misc/polybar

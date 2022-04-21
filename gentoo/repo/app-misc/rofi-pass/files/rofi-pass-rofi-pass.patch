@@ -1,0 +1,11 @@
+--- a/rofi-pass
++++ b/rofi-pass
+@@ -6,7 +6,7 @@ basecommand="$0"
+ 
+ # set default settings
+ _rofi () {
+-	rofi -no-auto-select -i "$@"
++	rofi -no-auto-select -i "$@" -theme $HOME/.config/rofi/launchers/style.rasi
+ }
+ 
+ _image_viewer () {

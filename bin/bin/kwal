@@ -53,9 +53,9 @@ if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v $wpg)" ]]; the
     fi
 
     if [[ -z $(pgrep spotify) ]]; then
-        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify
+        spicetify apply &>/dev/null && pkill spotify
     else
-        $HOME/.local/bin/spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
+        spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
     fi 
     exit 0
 else

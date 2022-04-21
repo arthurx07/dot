@@ -10,7 +10,7 @@ EGIT_REPO_URI="https://github.com/nickclyde/$PN.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="+dmenu rofi"
 
 DEPEND="
@@ -21,7 +21,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-#S="${WORKDIR}/${PN}-${PV}"
+PATCHES=(
+	"${FILESDIR}/${PN}-rofi-bluetooth.patch"
+)
 
 src_install() {
 	dobin rofi-bluetooth

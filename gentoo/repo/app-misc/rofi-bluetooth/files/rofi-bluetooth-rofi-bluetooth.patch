@@ -1,0 +1,37 @@
+--- a/rofi-bluetooth
++++ b/rofi-bluetooth
+@@ -183,24 +183,8 @@ toggle_trust() {
+ # Useful for status bars like polybar, etc.
+ print_status() {
+     if power_on; then
+-        printf ''
++        printf ''
+ 
+-        mapfile -t paired_devices < <(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)
+-        counter=0
+-
+-        for device in "${paired_devices[@]}"; do
+-            if device_connected $device; then
+-                device_alias=$(bluetoothctl info $device | grep "Alias" | cut -d ' ' -f 2-)
+-
+-                if [ $counter -gt 0 ]; then
+-                    printf ", %s" "$device_alias"
+-                else
+-                    printf " %s" "$device_alias"
+-                fi
+-
+-                ((counter++))
+-            fi
+-        done
+         printf "\n"
+     else
+         echo ""
+@@ -299,7 +283,7 @@ show_menu() {
+ }
+ 
+ # Rofi command to pipe into, can add any options here
+-rofi_command="rofi -dmenu -no-fixed-num-lines -yoffset -100 -i -p"
++rofi_command="rofi -dmenu -no-fixed-num-lines -yoffset -100 -i -p -theme $HOME/.config/rofi/launchers/style.rasi"
+ 
+ case "$1" in
+     --status)

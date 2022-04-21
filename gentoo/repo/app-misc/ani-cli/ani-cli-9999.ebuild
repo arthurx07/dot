@@ -6,12 +6,11 @@ inherit git-r3
 
 DESCRIPTION="A cli tool to browse and play anime"
 HOMEPAGE="https://github.com/pystardust/ani-cli"
-#SRC_URI="https://github.com/pystardust/$PN/archive/refs/tags/v$PV.tar.gz -> $P.tar.gz"
 EGIT_REPO_URI="$HOMEPAGE.git"
 
 LICENSE="GPL-3"
+KEYWORDS="~amd64"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="sys-apps/grep net-misc/curl sys-apps/sed media-video/mpv media-video/ffmpeg dev-libs/openssl"

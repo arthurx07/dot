@@ -1,0 +1,92 @@
+#!/bin/bash
+
+install_configs() {
+    for i in $(ls -d $HOME/dot/*/ | awk '{gsub("/home/kumao/dot/", "");print}' | awk '{gsub("gentoo/", "");print}')
+    do
+        stow -R $i
+    done
+}
+
+install_programs() {
+    # add installing portage var
+    emerge -avt \
+        $(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' $HOME/dot/gentoo/world)
+}
+
+install_overlay() {
+    emerge -avt app-eselect/eselect-repository
+
+    eselect repository create kumao 
+
+    for repo in $(cat $HOME/dot/gentoo/repositories); do
+        eselect repository enable $repo
+    done
+
+    cp -r $HOME/dot/gentoo/repo/* /var/db/repos/kumao/
+}
+
+remove_configs() {
+    for i in $(ls -d $HOME/dot/*/ | awk '{gsub("/home/kumao/dot/", "");print}' | awk '{gsub("gentoo/", "");print}')
+    do
+        stow -D $i
+    done
+}
+
+remove_programs() {
+    # add removing portage var
+    emerge -aW \
+        $(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' $HOME/dot/gentoo/world) \
+        --exclude app-eselect/eselect-repository && \
+        emerge -cva
+}
+
+remove_overlay() {
+    for repo in $(cat $HOME/dot/gentoo/repositories); do
+        eselect repository remove $repo
+    done
+
+    emerge -aW app-eselect/eselect-repository && emerge -cva
+}
+
+help() {
+    echo -e "qdot: utility to install or remove my dotfiles
+Options: -[ i,ic,ip,io,r,rc,rp,ro ]
+          [ --install ] [ --remove ] 
+            [ -configs ]  [ -overlay ] [ -programs ]"
+}
+case $1 in
+    -i)
+        install_configs
+        install_overlay
+        install_programs
+        ;;
+    -ic)
+        install_configs
+        ;;
+    -ip)
+        install_programs
+        ;;
+    -io)
+        install_overlay
+        ;;
+    -r)
+        remove_programs
+        remove_overlay
+        remove_configs
+        ;;
+    -rc)
+        remove_configs
+        ;;
+    -rp)
+        remove_programs
+        ;;
+    -ro)
+        remove_overlay
+        ;;
+    -h)
+        help
+        ;;
+    *)
+        help
+        ;;
+esac

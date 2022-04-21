@@ -6,7 +6,9 @@
 
 config_version: 2
 settings:
+  content.geolocation:
+    https://cerveto.clickedu.eu: false
   statusbar.show:
-    global: always
+    global: never
   tabs.show:
-    global: always
+    global: never

@@ -141,10 +141,6 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 # }}} End configuration added by Zim install
 
-# Customization
-#neofetch 
-# figlet "message"
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -170,8 +166,8 @@ alias c="clear"
 #alias q="exit"
 alias :q="exit"
 alias hd="hexdump -C"
-alias ls="exa -lgh --group-directories-first"
-alias la="exa -lgha --group-directories-first"
+#alias ls="exa -lgh --group-directories-first"
+#alias la="exa -lgha --group-directories-first"
 alias mkdir="mkdir -pv"
 alias mv="mv -i"
 alias cp="cp -i"
@@ -187,8 +183,6 @@ alias clock="tty-clock"
 alias qb="qutebrowser"
 alias wstatus="iwctl station wlan0 show"
 alias wifi="iwctl"
-alias protonvpn="doas protonvpn"
-alias vpn="doas protonvpn"
 
 alias .1="cd .."
 alias .2="cd ../.."
@@ -201,7 +195,6 @@ alias anime="ani-cli"
 alias a="ani-cli"
 alias manga="tachidesk"
 alias m="tachidesk"
-alias s="$HOME/.local/bin/spotify-tui/spt"
 
 alias emerge-sync="${PRIV} eix-sync"
 alias emerge-upgrade="${PRIV} emerge --update --newuse --deep --ask --tree --verbose --with-bdeps=y --quiet @world && ${PRIV} smart-live-rebuild"
@@ -221,18 +214,8 @@ alias eclean_pkg="${PRIV} eclean-pkg --deep"
 alias rc-service="${PRIV} rc-service"
 alias rc-update="${PRIV} rc-update"
 alias clean_ram="${PRIV} sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'"
-alias g="gentoo-sys-update"
-
-alias 256colors="~/.color-toys/256colors2.pl"
-alias bloks="~/.color-toys/bloks"
-alias colorbars="~/.color-toys/colorbars"
-alias colortest="~/.color-toys/colortest"
-alias colortest-slim="~/.color-toys/colortest-slim"
-alias colorview="~/.color-toys/colorview"
-alias panes="~/.color-toys/panes"
-alias pipes1="~/.color-toys/pipes1"
-alias pipes2="~/.color-toys/pipes2"
-alias pipes2-slim="~/.color-toys/pipes2-slim"
+alias g="qupgrade"
+alias u="qupgrade"
 
 # gentoo zsh completions
 autoload -U compinit promptinit

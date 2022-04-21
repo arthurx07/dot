@@ -10,7 +10,7 @@ EGIT_REPO_URI="https://github.com/pspiagicw/ly-gentoo.git"
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 DEPEND="
 	sys-devel/gcc
