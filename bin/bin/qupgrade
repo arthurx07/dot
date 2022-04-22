@@ -10,5 +10,5 @@ fi
 
 emerge --update --newuse --deep --ask --tree --complete-graph --verbose \
     --with-bdeps=y @world && \
-    smart-live-rebuild --jobs=4 && \
+    smart-live-rebuild --jobs=6 && \
     emerge --depclean --verbose --ask
