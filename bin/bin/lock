@@ -2,9 +2,10 @@
 
 # Suspend dunst and lock, then resume dunst when unlocked.
 pkill -u $USER -USR1 dunst
-if [ $1 == --i3lock ]; then
-    i3lock-fancy-rapid 5 5 -e -u
-else
+if [[ -f /usr/bin/slimlock ]]; then
+    #i3lock-fancy-rapid 5 5 -e -u
     slimlock
+else
+    exit 2
 fi
 pkill -u $USER -USR2 dunst

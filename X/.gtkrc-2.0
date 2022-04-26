@@ -1,5 +1,5 @@
-gtk-theme-name="FlatColor"
-gtk-icon-theme-name="flattrcolor-dark"
+#gtk-theme-name="FlatColor"
+#gtk-icon-theme-name="flattrcolor-dark"
 gtk-font-name="RobotoMono Nerd Font Regular"
-gtk-cursor-theme-name="Bibata-Modern-Ice"
-gtk-cursor-theme-size=0
+#gtk-cursor-theme-name="Bibata-Modern-Ice"
+#gtk-cursor-theme-size=0

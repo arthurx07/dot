@@ -61,12 +61,9 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/i3lock ]]; then
-			#i3lock
+		if [[ -f /usr/bin/slimlock ]]; then
             #i3lock-fancy-rapid 5 5 -e -u
             slimlock
-		elif [[ -f /usr/bin/betterlockscreen ]]; then
-			betterlockscreen -l
 		fi
         ;;
     $suspend)

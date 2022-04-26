@@ -8,10 +8,10 @@ wpg() {
         done
     fi
 
+    feh --bg-scale $file
     $wpg -a "$file" &>/dev/null && \
         $wpg -s "$($wpg -l)" &>/dev/null && \
         $wpg -d "$($wpg -l)"
-    feh --bg-scale $file
 }
 
 if [ $# -lt 1 ];then

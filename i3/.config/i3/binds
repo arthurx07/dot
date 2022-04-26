@@ -64,7 +64,7 @@ bindsym $mod+s exec --no-startup-id $mplayer &
 bindsym $mod+w exec --no-startup-id "$term -e $fm"
 bindsym $mod+a exec --no-startup-id "$term -e $ani &"
 bindsym $mod+m exec --no-startup-id "$manga"
-bindsym $mod+d exec --no-startup-id "/opt/discord/Discord/Discord"
+bindsym $mod+d exec --no-startup-id "discord"
 bindsym --release $mod+Escape exec --no-startup-id flameshot gui
 #bindsym $mod+ctrl+minus exec --no-startup-id "$HOME/bin/mpyt"
 bindsym $mod+ctrl+minus exec --no-startup-id "$HOME//bin/qb11"

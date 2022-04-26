@@ -1,9 +1,10 @@
 #!/bin/env bash
 
-amixer -q set Master toggle
+#amixer -q set Master toggle
+pamixer -t
 
 if [[ $(pamixer --get-mute) == true ]]; then
     dunstify -h string:x-dunst-stack-tag:mute " 婢  volume muted" -t 2000
-elif [[ $($HOME/.local/bin/pamixer/build/pamixer --get-mute) == false ]]; then
+elif [[ $(pamixer --get-mute) == false ]]; then
     dunstify -h string:x-dunst-stack-tag:mute "   volume unmuted" -t 2000
 fi
