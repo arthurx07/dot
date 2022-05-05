@@ -1,0 +1,11 @@
+#!/bin/env sh
+# This is a small program, which detects wheter laptop is connected to electricity 
+# and, depending on the output, runs a program with prime-run or not.
+
+online=`cat /sys/class/power_supply/ADP0/online`
+
+if [[ $online == 0 ]] || [[ $@ == discord ]];then
+    $@
+elif [[ $online == 1 ]]; then
+    prime-run $@
+fi

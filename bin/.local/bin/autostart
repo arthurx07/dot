@@ -1,0 +1,6 @@
+#!/bin/bash
+
+i3-msg 'exec --no-startup-id spotify-adblock' && sleep 1 && \
+    i3-msg 'workspace 7; exec kitty -e ranger' && \
+    i3-msg 'workspace 6; exec kitty -e gotop --nvidia' && \
+    i3-msg 'workspace 4; workspace 1'

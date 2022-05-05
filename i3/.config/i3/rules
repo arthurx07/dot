@@ -12,12 +12,15 @@
 #
 #------------------------------------------------------------------------------
 
-for_window [window_role="popup"] floating enable
-for_window [window_role="pop-up"] floating enable
+set $primary "^[1,2,3,5,10]$"
+set $secondary "^[4,6,7,8,9,11]$"
+
+for_window [window_role="popup"] floating enable, resize set 1000 1000
+for_window [window_role="pop-up"] floating enable, resize set 1000 1000
 for_window [window_role="task_dialog" ] floating enable
 for_window [class=".*"] border pixel 0
-for_window [floating workspace="^[1,2,3,5,10]$"] resize set 2240 1260, move position center
-for_window [floating workspace="^[4,6,7,8,9,11]$"] resize set 1600 900, move position center
+for_window [floating workspace=$primary] resize set 2240 1260, move position center
+for_window [floating workspace=$secondary] resize set 1600 900, move position center
 for_window [class="^Links$" title="^Links$"] floating disable
 for_window [title="^Event Tester$" id="0x1000001"] floating enable
 
@@ -32,3 +35,4 @@ for_window [class="^[Ss]potify$"] move container to workspace $ws9
 for_window [class="^qutebrowser$" title="^.*WhatsApp.*$"] floating enable, resize set 1440 900
 for_window [class="^qutebrowser$" title="^.*YouTube.*$" floating workspace=11] resize set 1760 990, move position 90 70
 for_window [class="^[Mm]inecraft.*$"] move container to workspace $ws5
+for_window [floating class="^[Ll]ibre{cad,CAD}"] resize set 100 100

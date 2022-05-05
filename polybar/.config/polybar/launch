@@ -8,18 +8,24 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
+if [[ $1 == vpn ]]; then
+    vpn=-vpn
+else
+    vpn=""
+fi
+
 # Launch the bar
 
 if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then 
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
-    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "date" -c "$DIR"/right-date.ini &
-    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "sys" -c "$DIR"/right-sys.ini &
+    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "date" -c "$DIR"/right-date$vpn.ini &
+    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
 
 elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then
     MONITOR="HDMI-1-0" polybar -q "workspace" -c "$DIR"/primary-left-workspace.ini &
     #MONITOR="HDMI-1-0" polybar -q "spotify" -c "$DIR"/right-spotify.ini &
-    MONITOR="HDMI-1-0" polybar -q "date" -c "$DIR"/right-date.ini &
-    MONITOR="HDMI-1-0" polybar -q "sys" -c "$DIR"/right-sys.ini &
+    MONITOR="HDMI-1-0" polybar -q "date" -c "$DIR"/right-date$vpn.ini &
+    MONITOR="HDMI-1-0" polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
     MONITOR="eDP-1" polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
     #MONITOR="eDP-1" polybar -q "tray" -c "$DIR"/right-tray.ini &
 fi

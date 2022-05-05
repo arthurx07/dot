@@ -1,0 +1,44 @@
+# Background
+$HOME/.local/bin/kwal $HOME/img/wal/4.jpg & #&& i3-msg 'restart'
+
+# Monitor Config & picom
+$HOME/.local/bin/xrandr-conf & 
+
+# Picom
+#exec_always --no-startup-id pgrep "picom" > /dev/null && killall picom && "picom &" || sleep 0.1 && picom &
+#picom -b &
+
+# Environment variables set everywhere
+export EDITOR="nvim"
+export TERMINAL="kitty"
+export BROWSER="qutebrowser"
+
+# XDG Paths
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_DOCUMENTS_DIR=$HOME/src
+export XDG_DOWNLOAD_DIR=$HOME/tmp
+export XDG_MUSIC_DIR=$HOME/mus
+export XDG_PICTURES_DIR=$HOME/img
+export XDG_DESKTOP_DIR=$HOME
+
+# For QT Themes
+# export QT_QPA_PLATFORMTHEME=qt5ct
+
+# Hide mouse when typing
+# xbanish &
+
+# Auto disk mounter
+udiskie &
+
+# Auto Lock
+xautolock -detectsleep -time 5 -locker '$HOME/.local/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
+
+# Pipewire
+gentoo-pipewire-launcher &
+
+# xsettingsd
+
+# zsh config dir
+export ZDOTDIR=$HOME/.config/zsh

@@ -1,0 +1,2 @@
+#!/bin/env sh
+kitty @ set-spacing margin=-20 && lvim $@ && kitty @ set-spacing margin=0
