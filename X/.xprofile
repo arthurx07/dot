@@ -9,7 +9,7 @@ $HOME/.local/bin/xrandr-conf &
 #picom -b &
 
 # Environment variables set everywhere
-export EDITOR="nvim"
+export EDITOR="lvim"
 export TERMINAL="kitty"
 export BROWSER="qutebrowser"
 

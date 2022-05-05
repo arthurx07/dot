@@ -1,65 +1,68 @@
-#!/bin/bash
-
+#!/bin/env sh
 path="$HOME/img/wal/"
 wpg="$HOME/.local/bin/wpg"
-wpg() {
+crontab -r 2>/dev/null
+
+wpgset() {
+  if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v $wpg)" ]]; then
     if [[ -n $($wpg -l) ]]; then 
-        for i in $($wpg -l); do
-            $wpg -d $i    # to prevent errors
-        done
+      for i in $($wpg -l); do
+        $wpg -d $i    # to prevent errors
+      done
     fi
 
-    $wpg -a "$file" &>/dev/null && \
-        $wpg -s "$($wpg -l)" &>/dev/null && \
-        $wpg -d "$($wpg -l)"
+    $wpg -a $file &>/dev/null && \
+      $wpg -s "$($wpg -l)" &>/dev/null && \
+      $wpg -d "$($wpg -l)"
+  fi
 }
 
-if [ $# -lt 1 ];then
-    file=`find $path -type f | grep -v "animevibe" | shuf -n 1`
-else
-    file=$1
-    if [ ! -f "$file" ]; then
-        echo -e "Usage : kwal path/to/image"
-        exit 1
-    fi
-fi
-
-if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v $wpg)" ]]; then
+fehset() {
+  if [[ -x "$(command -v feh)" ]]; then
     sleep 0.5 && feh --bg-scale $file
+  else
+    echo -e "Error: feh not installed"
+    exit 2
+  fi
+}
 
-    # for when feh didn't had multihead support
-    #&& -x "$(command -v convert)"  
-    #if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
-    #    convert "$file" -resize 1920x1080 "$HOME/.kwal.tmp"
-    #    wpg
-    #elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]]; then
-    #    convert "$file" -resize 1920x1080 "$HOME/.kwal1.tmp"
-    #    convert "$file" -resize 2560x1440 "$HOME/.kwal2.tmp"
-    #    convert "$HOME/.kwal[1,2].tmp" +append "$HOME/.kwal.tmp" && rm $HOME/.kwal[1,2].tmp
-    #    wpg
-    #fi
-    #feh --bg-scale "$HOME/.kwal.tmp"
-    #rm $HOME/.kwal.tmp && 
+if [[ $1 == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
+  if [ $2 == -h ] || [ $2 == --help ]; then
+    dwall -h
+    exit 0
+  fi
+  dwall -s $2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/dwall -s $2") | crontab -
+  file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
 
-    wpg
-    
-    $HOME/.local/bin/panes && $HOME/bin/dunstwal 2>/dev/null 
+elif [ $# -lt 1 ]; then
+  file=`find $path -type f | grep -v "animevibe" | shuf -n 1`
 
-    if [[ -z $(pgrep qutebrowser) ]]; then
-        qutebrowser --nowindow :config-source &>/dev/null & $HOME/.local/bin/p-qutebrowser
-    fi
-
-    if [[ -z $(pgrep polybar) ]]; then
-        $HOME/.config/polybar/launch
-    fi
-
-    if [[ -z $(pgrep spotify) ]]; then
-        spicetify apply &>/dev/null && pkill spotify
-    else
-        spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
-    fi 
-    sleep 0.5 && i3-msg 'restart' >/dev/null
-    exit
 else
-    echo -e "Error: Either wal or wpg not installed"
+  file=$1
+  if [[ ! -f $file ]]; then
+    echo -e "Usage : kwal path/to/image"
+    exit 1
+  fi
 fi
+
+fehset
+
+wpgset
+    
+$HOME/.local/bin/panes && $HOME/bin/dunstwal 2>/dev/null
+
+if [[ -z $(pgrep qutebrowser) ]]; then
+  qutebrowser --nowindow :config-source &>/dev/null & $HOME/.local/bin/p-qutebrowser
+fi
+
+if [[ -z $(pgrep polybar) ]]; then
+  $HOME/.config/polybar/launch
+fi
+
+if [[ -z $(pgrep spotify) ]]; then
+  spicetify apply &>/dev/null && pkill spotify
+else
+  spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
+fi
+
+sleep 0.5 && i3-msg 'restart' >/dev/null
