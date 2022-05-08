@@ -59,6 +59,7 @@ set $ws10 "10"
 set $ws11 "11"
 
 # autostart
-exec_always --no-startup-id pgrep "picom" > /dev/null && killall picom && "picom &" || sleep 0.1 && picom &
+exec --no-startup-id $HOME/.local/bin/xrandr-conf && (picom &) 
 exec --no-startup-id $HOME/.config/polybar/launch
-exec $HOME/.local/bin/autostart
+exec --no-startup-id $HOME/.local/bin/kwal
+# exec --no-startup-id $HOME/.local/bin/autostart

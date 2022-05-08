@@ -73,7 +73,10 @@ case $chosen in
 			amixer set Master mute
 			playerctl stop
 			#systemctl suspend
-            $HOME/bin/lock --i3lock
+		      if [[ -f /usr/bin/slimlock ]]; then
+            #i3lock-fancy-rapid 5 5 -e -u
+          slimlock &
+		      fi
             loginctl suspend
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0

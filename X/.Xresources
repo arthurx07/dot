@@ -1,2 +1,7 @@
-Xcursor.theme: Bibata-Modern-Ice
-Xcursor.size: 16
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+Xft.rgba:      rgb

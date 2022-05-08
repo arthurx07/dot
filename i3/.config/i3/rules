@@ -36,3 +36,5 @@ for_window [class="^qutebrowser$" title="^.*WhatsApp.*$"] floating enable, resiz
 for_window [class="^qutebrowser$" title="^.*YouTube.*$" floating workspace=11] resize set 1760 990, move position 90 70
 for_window [class="^[Mm]inecraft.*$"] move container to workspace $ws5
 for_window [floating class="^[Ll]ibre{cad,CAD}"] resize set 100 100
+for_window [class="^[wW]pg$"] floating enable, resize set 100 100
+

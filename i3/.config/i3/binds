@@ -35,7 +35,7 @@ set $poweroff "$HOME/.config/rofi/powermenu/powermenu.sh"
 #----------------------------------------------------------------------Programs
 # wallpaper
 bindsym $mod+Shift+b exec --no-startup-id "$HOME/.local/bin/kwal"
-bindsym $mod+Shift+ctrl+b exec --no-startup-id "$HOME/.local/bin/kwal $HOME/wal/4.jpg"
+bindsym $mod+Shift+ctrl+b exec --no-startup-id "$HOME/.local/bin/kwal desert.jpg"
 
 # i3
 bindsym $mod+Shift+c reload

@@ -1,13 +1,3 @@
-# Background
-$HOME/.local/bin/kwal $HOME/img/wal/4.jpg & #&& i3-msg 'restart'
-
-# Monitor Config & picom
-$HOME/.local/bin/xrandr-conf & 
-
-# Picom
-#exec_always --no-startup-id pgrep "picom" > /dev/null && killall picom && "picom &" || sleep 0.1 && picom &
-#picom -b &
-
 # Environment variables set everywhere
 export EDITOR="lvim"
 export TERMINAL="kitty"
@@ -24,10 +14,7 @@ export XDG_PICTURES_DIR=$HOME/img
 export XDG_DESKTOP_DIR=$HOME
 
 # For QT Themes
-# export QT_QPA_PLATFORMTHEME=qt5ct
-
-# Hide mouse when typing
-# xbanish &
+export QT_QPA_PLATFORMTHEME=kvantum
 
 # Auto disk mounter
 udiskie &
@@ -36,9 +23,7 @@ udiskie &
 xautolock -detectsleep -time 5 -locker '$HOME/.local/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
 
 # Pipewire
-gentoo-pipewire-launcher &
-
-# xsettingsd
+gentoo-pipewire-launcher & 
 
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh

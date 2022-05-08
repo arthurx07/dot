@@ -1,62 +1,46 @@
 #!/bin/env sh
+killall /home/kumao/.local/bin/kwall
 path="$HOME/img/wal/"
 wpg="$HOME/.local/bin/wpg"
 crontab -r 2>/dev/null
 
 wpgset() {
   if [[ -x "$(command -v $HOME/.local/bin/wal)" && -x "$(command -v $wpg)" ]]; then
-    if [[ -n $($wpg -l) ]]; then 
-      for i in $($wpg -l); do
-        $wpg -d $i    # to prevent errors
-      done
-    fi
-
-    $wpg -a $file &>/dev/null && \
-      $wpg -s "$($wpg -l)" &>/dev/null && \
-      $wpg -d "$($wpg -l)"
+    $wpg -s $file>/dev/null
   fi
 }
 
-fehset() {
-  if [[ -x "$(command -v feh)" ]]; then
-    sleep 0.5 && feh --bg-scale $file
-  else
-    echo -e "Error: feh not installed"
-    exit 2
-  fi
-}
-
-if [[ $1 == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
+if [[ $1 == "-d" ]] || [[ $1 == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
   if [ $2 == -h ] || [ $2 == --help ]; then
     dwall -h
     exit 0
   fi
-  dwall -s $2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/dwall -s $2") | crontab -
+  dwall -s $2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $2") | crontab -
   file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
+  wpgset
 
 elif [ $# -lt 1 ]; then
-  file=`find $path -type f | grep -v "animevibe" | shuf -n 1`
+  $wpg -m>/dev/null
+
+elif [[ $($wpg -l  | grep $1) == "" ]]; then
+  if [[ ! -f $1 ]]; then
+    echo -e "Usage: kwal path/to/image"
+    exit 1
+  fi
+  $wpg -a $1>/dev/null
+  file=`echo $1 | sed 's/.*[/]//'`
+  wpgset
+  $wpg -d $file>/dev/null
 
 else
   file=$1
-  if [[ ! -f $file ]]; then
-    echo -e "Usage : kwal path/to/image"
-    exit 1
-  fi
+  wpgset
 fi
 
-fehset
-
-wpgset
-    
 $HOME/.local/bin/panes && $HOME/bin/dunstwal 2>/dev/null
 
-if [[ -z $(pgrep qutebrowser) ]]; then
-  qutebrowser --nowindow :config-source &>/dev/null & $HOME/.local/bin/p-qutebrowser
-fi
-
-if [[ -z $(pgrep polybar) ]]; then
-  $HOME/.config/polybar/launch
+if [[ -n $(pgrep qutebrowser) ]]; then
+  qutebrowser :config-source &>/dev/null
 fi
 
 if [[ -z $(pgrep spotify) ]]; then
@@ -65,4 +49,6 @@ else
   spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
 fi
 
-sleep 0.5 && i3-msg 'restart' >/dev/null
+sleep 2 && i3-msg 'restart'>/dev/null
+
+exit 0
