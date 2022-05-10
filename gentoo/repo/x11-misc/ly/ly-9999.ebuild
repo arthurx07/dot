@@ -1,6 +1,8 @@
 # Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# ! PACKAGE BROKEN [NOT COMPATIBLE WITH OPENRC]
+
 EAPI=8
 inherit git-r3
 
@@ -10,7 +12,7 @@ EGIT_REPO_URI="https://github.com/fairyglade/ly.git"
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="-*"
 
 DEPEND="
 	sys-devel/gcc

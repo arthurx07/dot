@@ -1,6 +1,8 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# ! POSSIBLY BROKEN EBUILD
+
 EAPI=8
 
 DESCRIPTION="Video wallpaper for Linux. Minimal and written in Python."
@@ -8,7 +10,7 @@ HOMEPAGE="https://github.com/jeffshee/hidamari"
 SRC_URI="https://github.com/jeffshee/hidamari/archive/refs/tags/v$PV-2.tar.gz"
 
 LICENSE="Apache-2.0"
-KEYWORDS="amd64"
+KEYWORDS="-*"
 SLOT="0"
 IUSE=""
 

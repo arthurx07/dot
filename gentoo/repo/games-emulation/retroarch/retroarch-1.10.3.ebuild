@@ -10,7 +10,7 @@ MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Frontend for emulators, game engines and media players"
 HOMEPAGE="https://www.retroarch.com/"
-SRC_URI="https://github.com/libretro/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/libretro/${MY_PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

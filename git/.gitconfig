@@ -3,3 +3,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [user]
 	name = kumao
+[init]
+	defaultBranch = main

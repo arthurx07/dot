@@ -9,12 +9,6 @@ an executable
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
-vim.opt.relativenumber = true -- set relative numbered lines
-vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.scrolloff = 8 -- is one of my fav
-
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "onedarker"
@@ -150,83 +144,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- Additional Plugins
-lvim.plugins = {
-  { "folke/tokyonight.nvim" },
-  { "deviantfero/wpgtk.vim" },
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
-  {
-    "kevinhwang91/rnvimr",
-    cmd = "RnvimrToggle",
-    config = function()
-      vim.g.rnvimr_draw_border = 1
-      vim.g.rnvimr_pick_enable = 1
-      vim.g.rnvimr_bw_enable = 1
-    end,
-  },
-  {
-    'wfxr/minimap.vim',
-    run = "cargo install --locked code-minimap",
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-    config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 1")
-      vim.cmd("let g:minimap_auto_start_win_enter = 1")
-    end,
-  },
-  {
-    "Pocco81/AutoSave.nvim",
-    config = function()
-      require("autosave").setup()
-    end,
-  },
-  {
-    "metakirby5/codi.vim",
-    cmd = "Codi",
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({ "*" }, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      })
-    end,
-  },
-  {
-    "karb94/neoscroll.nvim",
-    event = "WinScrolled",
-    config = function()
-      require('neoscroll').setup({
-        -- All these keys will be mapped to their corresponding default scrolling animation
-        mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>',
-          '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
-        hide_cursor = true, -- Hide cursor while scrolling
-        stop_eof = true, -- Stop at <EOF> when scrolling downwards
-        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil, -- Default easing function
-        pre_hook = nil, -- Function to run before the scrolling animation starts
-        post_hook = nil, -- Function to run after the scrolling animation ends
-      })
-    end
-  },
-}
+-- lvim.plugins = {
+--     {"folke/tokyonight.nvim"},
+--     {
+--       "folke/trouble.nvim",
+--       cmd = "TroubleToggle",
+--     },
+-- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {

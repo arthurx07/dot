@@ -1,5 +1,8 @@
-#!/bin/env sh
-killall /home/kumao/.local/bin/kwall
+#!/bin/env bash
+# if [[ -n $(pgrep -f ${BASH_SOURCE[0]} | grep -v $$) ]]; then
+# kill -9 $(pgrep -f ${BASH_SOURCE[0]} | grep -v $$)2>/dev/null
+# fi
+
 path="$HOME/img/wal/"
 wpg="$HOME/.local/bin/wpg"
 crontab -r 2>/dev/null
@@ -10,30 +13,51 @@ wpgset() {
   fi
 }
 
-if [[ $1 == "-d" ]] || [[ $1 == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
-  if [ $2 == -h ] || [ $2 == --help ]; then
+if [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
+  echo "kwal is an utility to manage your wallpaper and colorscheme with wpg \
+    [Options] \
+    kwal -h -> for help \
+    kwal ... -> for setting wallpaper \
+    kwal -r -> to set latest used wallpaper \
+    kwal -d -h -> for dwal help \
+    kwal -d ... -> for setting dynamic wallpaper"
+  exit 0
+fi
+
+if [[ $1 == "-r" ]]; then
+  option=`awk '{print $1}' $HOME/.cache/kwal_current` 
+  arg=`awk '{print $2}' $HOME/.cache/kwal_current`
+else
+  if [[ $# -gt 0 ]]; then
+    option=$1
+    arg=$2
+  fi
+fi
+
+if [[ $option == "-d" ]] || [[ $option == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
+  if [ $arg == -h ] || [ $arg == --help ]; then
     dwall -h
     exit 0
   fi
-  dwall -s $2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $2") | crontab -
+  dwall -s $arg>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg") | crontab -
   file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
   wpgset
 
 elif [ $# -lt 1 ]; then
   $wpg -m>/dev/null
 
-elif [[ $($wpg -l  | grep $1) == "" ]]; then
-  if [[ ! -f $1 ]]; then
+elif [[ $($wpg -l  | grep $option) == "" ]]; then
+  if [[ ! -f $option ]]; then
     echo -e "Usage: kwal path/to/image"
     exit 1
   fi
-  $wpg -a $1>/dev/null
-  file=`echo $1 | sed 's/.*[/]//'`
+  $wpg -a $option>/dev/null
+  file=`echo $option | sed 's/.*[/]//'`
   wpgset
   $wpg -d $file>/dev/null
 
 else
-  file=$1
+  file=$option
   wpgset
 fi
 
@@ -50,5 +74,13 @@ else
 fi
 
 sleep 2 && i3-msg 'restart'>/dev/null
+
+if [[ $1 != '-r' ]]; then
+  if [[ $# -gt 0 ]]; then
+    echo $option $arg > $HOME/.cache/kwal_current
+  else
+    echo $(awk '{gsub("\047","");print $4}' $HOME/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
+  fi
+fi
 
 exit 0

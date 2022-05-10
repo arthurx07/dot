@@ -9,7 +9,7 @@ HOMEPAGE="https://github.com/deviantfero/wpgtk"
 EGIT_REPO_URI="$HOMEPAGE.git"
 
 LICENSE="GPL-2"
-KEYWORDS="amd64"
+KEYWORDS="-*"
 SLOT="0"
 IUSE="+livereload +betterlooking"
 

@@ -68,7 +68,7 @@ case $chosen in
         ;;
     $suspend)
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" || $ans == "" ]]; then
 			mpc -q pause
 			amixer set Master mute
 			playerctl stop

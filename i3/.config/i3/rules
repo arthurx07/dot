@@ -19,8 +19,11 @@ for_window [window_role="popup"] floating enable, resize set 1000 1000
 for_window [window_role="pop-up"] floating enable, resize set 1000 1000
 for_window [window_role="task_dialog" ] floating enable
 for_window [class=".*"] border pixel 0
-for_window [floating workspace=$primary] resize set 2240 1260, move position center
-for_window [floating workspace=$secondary] resize set 1600 900, move position center
+# for_window [floating workspace=$primary] resize set 2240 1260, move position center
+# for_window [floating workspace=$secondary] resize set 1600 900, move position center
+# for_window [floating workspace=$primary] move position center
+# for_window [floating workspace=$secondary] move position center
+for_window [floating] move position center
 for_window [class="^Links$" title="^Links$"] floating disable
 for_window [title="^Event Tester$" id="0x1000001"] floating enable
 
@@ -30,11 +33,16 @@ for_window [class="^[Qq]jack[Cc]tl$"] floating enable
 for_window [class="^[Qq]jack[Cc]tl$" title="JACK Audio Connection Kit"] floating enable, resize set 500 150
 for_window [class="^imv$"] floating enable
 for_window [class="^mpv$"] floating enable
+for_window [class="^feh$"] floating enable, resize set 1600 900
 for_window [title="^Tachidesk$"] move container to workspace $ws3
 for_window [class="^[Ss]potify$"] move container to workspace $ws9
+for_window [floating class="^[Ss]potify$"] move container to workspace $ws9, resize set 1600 900, move postion center
 for_window [class="^qutebrowser$" title="^.*WhatsApp.*$"] floating enable, resize set 1440 900
 for_window [class="^qutebrowser$" title="^.*YouTube.*$" floating workspace=11] resize set 1760 990, move position 90 70
 for_window [class="^[Mm]inecraft.*$"] move container to workspace $ws5
 for_window [floating class="^[Ll]ibre{cad,CAD}"] resize set 100 100
 for_window [class="^[wW]pg$"] floating enable, resize set 100 100
-
+for_window [class="^[Oo]rg.gnome.Nautilus$"] floating enable
+for_window [class="^{kvantummanager,Kvantum Manager}"] floating enable, resize set 300 300
+for_window [class="kitty" floating workspace=$primary] move position center, resize set 1600 900
+for_window [class="kitty" floating workspace=$secondary] move position center, resize set 1600 900

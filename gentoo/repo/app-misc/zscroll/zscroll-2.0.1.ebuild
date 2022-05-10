@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="A text scroller for panels or terminals"
 HOMEPAGE="https://github.com/noctuid/$PN"
-SRC_URI="$HOMEPAGE/archive/refs/tags/$PV.tar.gz -> $P.tar.gz"
+SRC_URI="$HOMEPAGE/archive/refs/tags/$PV.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

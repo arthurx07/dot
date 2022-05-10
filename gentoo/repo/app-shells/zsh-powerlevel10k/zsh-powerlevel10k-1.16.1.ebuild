@@ -1,6 +1,8 @@
 # Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# ! POSSIBLY BROKEN EBUILD
+
 EAPI=7
 
 MY_PN="${PN##zsh-theme-}"
@@ -11,7 +13,7 @@ SRC_URI="https://github.com/romkatv/powerlevel10k/archive/v${PV}.tar.gz -> ${P}.
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~"
 
 DEPEND="app-shells/zsh
 		app-shells/gitstatus[zsh-completion]"
