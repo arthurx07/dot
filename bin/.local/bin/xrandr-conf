@@ -1,7 +1,10 @@
 #!/bin/bash
 
-if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then
-	xrandr --output eDP-1 --mode 1920x1080 --primary
-elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]]; then 
-    xrandr --output HDMI-1-0 --primary --mode 2560x1440 --pos 1920x0 --rotate normal --refresh 144 --right-of eDP-1 --output eDP-1 --mode 1920x1080 --pos 0x360 --rotate normal --left-of HDMI-1-0 --refresh 144
+M0=eDP-1
+M1=HDMI-1-0
+
+if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == $M0 ]]; then
+	xrandr --output $M0 --mode 1920x1080 --primary
+elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "$M0 $M1" ]]; then 
+    xrandr --output $M1  --primary --mode 2560x1440 --pos 1920x0 --rotate normal --refresh 144 --right-of $M0 --output $M0 --mode 1920x1080 --pos 0x360 --rotate normal --left-of $M1 --refresh 144
 fi

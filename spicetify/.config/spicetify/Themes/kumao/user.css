@@ -20,15 +20,21 @@
 /* remove gradients */
 .main-home-homeHeader, .main-actionBarBackground-background {
   background-image: none;
+  background: var(--spice-main);
 }
 .main-actionBarBackground-background, .main-home-homeHeader, .main-topBar-background, .main-topBar-overlay, .x-entityHeader-overlay, .x-actionBarBackground-background, ._UFTK833WfTNGb4agRTd, .Ic3iDUCnC09k55peZBfC {
   background-color: var(--spice-main) !important;
 }
 .x-actionBarBackground-background, .x-entityHeader-overlay, .Ic3iDUCnC09k55peZBfC, ._UFTK833WfTNGb4agRTd {
   background-image: none !important;
+  background: var(--spice-main);
 }
 .main-entityHeader-backgroundColor {
   background: var(--spice-main);
+}
+/* extra:: hides the gradient color for more minimalistic look on the top of the home page */
+.n87ifzfQlmGX8vkeYGDL {
+    visibility: hidden;
 }
 /* remove dividers */
 .main-trackList-trackListHeaderRow, .main-trackCreditsModal-header {
@@ -170,7 +176,7 @@ button.switch {
   height: 32px;
 }
 .main-rootlist-rootlistItemLinkActive ~ .main-rootlist-expandArrow:focus, .main-rootlist-rootlistItemLinkActive ~ .main-rootlist-expandArrow:hover, .main-rootlist-rootlistItemLinkActive ~ .main-rootlist-expandArrow {
-  color: var(--spice-shadow);
+  color: var(--spice-text);
 }
 .main-rootlist-expandArrow {
   color: var(--spice-text);
@@ -502,8 +508,8 @@ input:hover:not([disabled]):not(:active)~.x-toggle-indicatorWrapper {
 .playback-bar__progress-time, .main-playbackBarRemainingTime-container {
   position: absolute;
   bottom: 0px;
-  right: -100px;
-  color: var(--spice-text);
+  right: -40px;
+  color: var(--spice-main);
 }
 .playback-bar__progress-time:first-child {
   margin-right: 0px;

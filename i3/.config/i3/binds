@@ -42,16 +42,19 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id i3-msg "floating toggle" && i3-msg "reload" #To solve tiling two times problem
-#bindsym $mod+space floating toggle
+# bindsym $mod+space floating toggle
 bindsym $mod+Shift+space focus mode_toggle
 bindsym $mod+Shift+Return exec --no-startup-id i3-msg open
-bindsym $mod+Shift+e exec --no-startup-id "$HOME/.config/rofi/applets/android/exit-i3.sh"
+# bindsym $mod+Shift+e exec --no-startup-id "$HOME/.config/rofi/applets/android/exit-i3.sh"
+bindsym $mod+i exec --no-startup-id $HOME/.local/bin/polyhide
+bindsym $mod+Shift+i exec --no-startup-id $HOME/.local/bin/polyhide kill
 
 # rofi
 bindsym $mod+Tab exec --no-startup-id $menu
 bindsym $mod+q exec --no-startup-id $run
 bindsym $mod+Shift+Tab exec --no-startup-id $rofifs
-bindsym $mod+p exec --no-startup-id $poweroff
+bindsym $mod+o exec --no-startup-id $poweroff
+bindsym $mod+p exec --no-startup-id rofi-pass
 
 # browser
 bindsym $mod+b exec --no-startup-id "$prun $browser"
@@ -68,6 +71,7 @@ bindsym $mod+m exec --no-startup-id "$prun $manga"
 bindsym $mod+d exec --no-startup-id "$prun discord"
 bindsym --release $mod+Escape exec --no-startup-id "$prun flameshot gui"
 bindsym $mod+Shift+p exec --no-startup-id "$HOME/.config/polybar/launch"
+bindsym $mod+Shift+x exec --no-startup-id "$HOME/.local/bin/xrandr-conf"
 
 # lofi 
 bindsym $mod+ctrl+minus exec --no-startup-id "$prun $HOME/.local/bin/qb11"

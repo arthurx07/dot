@@ -12,8 +12,9 @@
 font pango:RobotoMono Nerd Font Mono 8
 #smart_borders off
 #smart_gaps on
-gaps outer 10
-gaps top 41
+gaps outer 5
+gaps top 0
+gaps bottom 0
 gaps inner 20
 force_focus_wrapping no
 workspace_layout default
@@ -59,7 +60,7 @@ set $ws10 "10"
 set $ws11 "11"
 
 # autostart
-exec --no-startup-id $HOME/.local/bin/xrandr-conf && (picom &) 
-exec --no-startup-id $HOME/.config/polybar/launch
-exec --no-startup-id "$HOME/.local/bin/kwal -r"
+exec --no-startup-id $HOME/.local/bin/xrandr-conf && (picom &)
+exec --no-startup-id $HOME/.config/polybar/launch && sleep 6 && $HOME/.local/bin/polyhide
+exec --no-startup-id $HOME/.local/bin/kwal -r 
 # exec --no-startup-id $HOME/.local/bin/autostart

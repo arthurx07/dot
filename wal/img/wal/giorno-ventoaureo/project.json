@@ -1,0 +1,22 @@
+{
+	"contentrating" : "Everyone",
+	"file" : "jojo_1.mp4",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "1 1 0"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ "Anime" ],
+	"title" : "jojo",
+	"type" : "video",
+	"visibility" : "public"
+}

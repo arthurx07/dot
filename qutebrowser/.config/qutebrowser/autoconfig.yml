@@ -13,6 +13,6 @@ settings:
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
   statusbar.show:
-    global: always
+    global: never
   tabs.show:
-    global: always
+    global: never

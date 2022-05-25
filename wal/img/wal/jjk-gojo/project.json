@@ -1,0 +1,65 @@
+{
+	"approved" : true,
+	"contentrating" : "Everyone",
+	"description" : "Audio Responsive.\r\nScreenshot of wallpaper as preview.\r\n\r\n[u] [h1] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2124383188] My approved wallpapers collection [/url]  [/h1] [/u]\r\n\r\nArtist : https://www.pixiv.net/en/users/14899403\r\nArtwork Source: https://www.pixiv.net/en/artworks/85729987\r\nMusic: Jujutsu Kaisen OST - Unreleased (HQ)\r\nMusic Link: https://www.youtube.com/watch?v=S0hWyUugGmQ\r\n\r\nLabels : Jujutsu Kaisen, Satoru Gojo, Immense Cursed Energy, Limitless, Infinity, Anime, Music, Audio Responsive, Six Eyes, Unlimited Void, Blue Eyes, White Hair, Black Clothing, Mask, Smoke, Moon, Clouds, Distortions, Animated, Night, Battle, Excitement, Teacher of Yuji Itadori, Megumi Fushiguro, Nobara Kugisaki",
+	"file" : "scene.json",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"audioresponsiveeyes" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Audio Responsive Eyes",
+				"type" : "bool",
+				"value" : true
+			},
+			"musicvolume" : 
+			{
+				"fraction" : true,
+				"index" : 0,
+				"max" : 2,
+				"min" : 0,
+				"order" : 100,
+				"precision" : 2,
+				"step" : 0.10000000000000001,
+				"text" : "Music Volume",
+				"type" : "slider",
+				"value" : 0.80000000000000004
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"smoke" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Smoke",
+				"type" : "bool",
+				"value" : true
+			},
+			"staticflashingeyes" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Static Flashing Eyes",
+				"type" : "bool",
+				"value" : true
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"preview" : "preview.gif",
+	"tags" : [ "Anime" ],
+	"title" : "Jujutsu Kaisen : Satoru Gojo 4k {By Pear}",
+	"type" : "scene",
+	"version" : 5,
+	"visibility" : "public",
+	"workshopid" : "2375914945",
+	"workshopurl" : "steam://url/CommunityFilePage/2375914945"
+}

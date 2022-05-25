@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+M0=eDP-1
+M1=HDMI-1-0
+
 DIR="$HOME/.config/polybar"
 
 # Terminate already running bar instances
@@ -16,16 +19,18 @@ fi
 
 # Launch the bar
 
-if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == eDP-1 ]]; then 
+if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == $M0 ]]; then 
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "date" -c "$DIR"/right-date$vpn.ini &
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
+    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "dock" -c "$DIR"/apps.ini &
 
-elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then
-    MONITOR="HDMI-1-0" polybar -q "workspace" -c "$DIR"/primary-left-workspace.ini &
-    #MONITOR="HDMI-1-0" polybar -q "spotify" -c "$DIR"/right-spotify.ini &
-    MONITOR="HDMI-1-0" polybar -q "date" -c "$DIR"/right-date$vpn.ini &
-    MONITOR="HDMI-1-0" polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
-    MONITOR="eDP-1" polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
-    #MONITOR="eDP-1" polybar -q "tray" -c "$DIR"/right-tray.ini &
+elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "$M0 $M1" ]];then
+    MONITOR="$M1" polybar -q "workspace" -c "$DIR"/primary-left-workspace.ini &
+    #MONITOR="$M1" polybar -q "spotify" -c "$DIR"/right-spotify.ini &
+    MONITOR="$M1" polybar -q "date" -c "$DIR"/right-date$vpn.ini &
+    MONITOR="$M1" polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
+    MONITOR="$M0" polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
+    MONITOR="$M1" polybar -q "dock" -c "$DIR"/apps.ini &
+    #MONITOR="$M0" polybar -q "tray" -c "$DIR"/right-tray.ini &
 fi

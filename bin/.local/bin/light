@@ -13,8 +13,7 @@ if [ $# -eq 1 ]; then
     fi
    
     if [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then # both eDP-1 and HDMI-1-0 connected
-        ddcutil setvcp --bus=$(ddcutil detect | awk 'NR==14 {print $3}' | sed 's/\/dev\/i2c-//'
-12) 10 $light
+        ddcutil setvcp --bus=$(ddcutil detect | awk 'NR==14 {print $3}' | sed 's/\/dev\/i2c-//') 10 $light
     fi
 
     echo -e "\n[ New light value is $light ]\n"

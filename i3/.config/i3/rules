@@ -42,7 +42,7 @@ for_window [class="^qutebrowser$" title="^.*YouTube.*$" floating workspace=11] r
 for_window [class="^[Mm]inecraft.*$"] move container to workspace $ws5
 for_window [floating class="^[Ll]ibre{cad,CAD}"] resize set 100 100
 for_window [class="^[wW]pg$"] floating enable, resize set 100 100
-for_window [class="^[Oo]rg.gnome.Nautilus$"] floating enable
+for_window [class="^[tT]hunar$"] floating enable
 for_window [class="^{kvantummanager,Kvantum Manager}"] floating enable, resize set 300 300
 for_window [class="kitty" floating workspace=$primary] move position center, resize set 1600 900
 for_window [class="kitty" floating workspace=$secondary] move position center, resize set 1600 900

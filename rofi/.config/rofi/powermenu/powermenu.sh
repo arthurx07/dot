@@ -68,16 +68,11 @@ case $chosen in
         ;;
     $suspend)
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" || $ans == "" ]]; then
+		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
 			mpc -q pause
 			amixer set Master mute
 			playerctl stop
-			#systemctl suspend
-		      if [[ -f /usr/bin/slimlock ]]; then
-            #i3lock-fancy-rapid 5 5 -e -u
-          slimlock &
-		      fi
-            loginctl suspend
+      loginctl suspend
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
