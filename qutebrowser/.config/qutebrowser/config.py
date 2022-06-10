@@ -37,8 +37,13 @@ c.auto_save.session = False
 
 # Automatically start playing `<video>` elements.
 # Type: Bool
-#c.content.autoplay = False
-c.content.autoplay = True
+c.content.autoplay = False
+#c.content.autoplay = True
+
+c.tabs.title.format_pinned = '{index} {audio}'
+c.tabs.background = True
+
+c.url.open_base_url = True
 
 c.input.insert_mode.auto_load = True
 #c.spellcheck.languages = ["en-US", "es-ES"]
@@ -195,7 +200,7 @@ c.downloads.remove_finished = 5000
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
+c.editor.command = ['kitty', '-e', "nvim", '{file}', '-c', 'normal {line}G{column0}l']
 
 # Command (and arguments) to use for selecting a single file in forms.
 # The command should write the selected file path to the specified file
@@ -304,13 +309,13 @@ c.url.default_page = "https://zombiefox.github.io/nightTab/"
 c.url.start_pages = "https://zombiefox.github.io/nightTab/"
 
 # Bindings for normal mode
-config.bind('M', 'hint links spawn mpv {hint-url}')
-config.bind('Z', 'hint links spawn st -e youtube-dl {hint-url}')
+config.bind(';m', 'hint links spawn --detach mpv --force-window yes {hint-url}')
+config.bind(';z', 'hint links spawn st -e youtube-dl {hint-url}')
 config.bind('t', 'set-cmd-text -s :open -t')
 #config.bind('xb', 'config-cycle statusbar.show always never')
 #config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
-config.bind("pt", 'pint-tab')
+config.bind("pt", 'tab-pin')
 config.bind("cs", 'config-source')
 config.bind("gr", 'greasemonkey-reload' )
 
@@ -506,9 +511,16 @@ c.content.blocking.adblock.lists = [
         "https://easylist.to/easylist/fanboy-annoyance.txt", \
         "https://secure.fanboy.co.nz/fanboy-annoyance.txt", \
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt", \
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt", \
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt", \
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2022.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/lan-block.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt", \
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt", \
-        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt" \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/quick-fixes.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt", \
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt", \
         ]

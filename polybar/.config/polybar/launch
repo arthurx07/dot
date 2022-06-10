@@ -23,7 +23,7 @@ if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == $M0 ]]; then
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "workspace" -c "$DIR"/secondary-left-workspace.ini &
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "date" -c "$DIR"/right-date$vpn.ini &
     MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "sys" -c "$DIR"/right-sys$vpn.ini &
-    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "dock" -c "$DIR"/apps.ini &
+    MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g') polybar -q "dock" -c "$DIR"/apps-eDP.ini &
 
 elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "$M0 $M1" ]];then
     MONITOR="$M1" polybar -q "workspace" -c "$DIR"/primary-left-workspace.ini &

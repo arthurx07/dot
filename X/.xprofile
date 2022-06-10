@@ -27,3 +27,11 @@ gentoo-pipewire-launcher &
 
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
+
+light-locker &
+
+$HOME/.local/bin/kwal -r &
+
+xrdb -merge $HOME/.Xresources &
+
+picom &

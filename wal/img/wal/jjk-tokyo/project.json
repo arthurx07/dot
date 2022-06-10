@@ -1,0 +1,23 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "Anime: Jujutsu Kaisen\nMusic:『Cö shu Nie - give it back』\nCharacters: Itadori,Satori Gojou,Nobara etc.\n\n\ni did my best...",
+	"file" : "scene.json",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0.64314 0.49412 0.44314"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ "Anime" ],
+	"title" : "Jujutsu Kaisen",
+	"type" : "scene",
+	"version" : 0
+}

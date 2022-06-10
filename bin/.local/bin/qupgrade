@@ -5,10 +5,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [[ $1 == "sync" ]]; then
-    eix-sync
+    emerge --sync --ask=n
 fi
 
 emerge --update --newuse --deep --ask --tree --complete-graph --verbose \
     --with-bdeps=y @world && \
     smart-live-rebuild --jobs=6 && \
-    emerge --depclean --verbose --ask
+    emerge --depclean -v --ask

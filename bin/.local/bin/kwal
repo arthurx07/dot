@@ -43,6 +43,12 @@ wallengineset() {
     wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/$arg >/dev/null 2>/dev/null & disown
 }
 
+lightdm-set() {
+  img=$(echo $image | sed 's/\//\\\//g' )
+  sed -i "s/^image\s*=\s*\(.*\)/image=$img /g" $HOME/.local/bin/lightdm-kwal
+  doas /home/kumao/.local/bin/lightdm-kwal
+}
+
 if [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
   echo "kwal is an utility to manage your wallpaper and colorscheme with wpg \
     [Options] \
@@ -71,7 +77,9 @@ if [[ $option == "-d" ]] || [[ $option == "dwall" ]] && [[ -x "$(command -v dwal
   fi
   dwall -s $arg>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg") | crontab -
   file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
+  image=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
   wpgset
+  lightdm-set
 
 elif [[ $option == "-a" ]]; then
 
@@ -85,6 +93,7 @@ elif [[ $option == "-a" ]]; then
     $wpg -a $image>/dev/null
     file=`echo $image | sed 's/.*[/]//'`
     wpgset
+    lightdm-set
     $wpg -d $file>/dev/null
   else
     to_convert=`ls $HOME/img/wal/$arg/preview.gif`
@@ -93,14 +102,16 @@ elif [[ $option == "-a" ]]; then
     $wpg -a $image>/dev/null
     file=`echo $image | sed 's/.*[/]//'`
     wpgset
+    lightdm-set
     $wpg -d $file>/dev/null
-    rm $HOME/.cache/kwal-cache.jpg
   fi
 
   wallengineset
 
 elif [ $# -lt 1 ]; then
   $wpg -m>/dev/null
+  image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
+  lightdm-set
 
 elif [[ $($wpg -l  | grep $option) == "" ]]; then
   if [[ ! -f $option ]]; then
@@ -115,6 +126,8 @@ elif [[ $($wpg -l  | grep $option) == "" ]]; then
 else
   file=$option
   wpgset
+  image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
+  lightdm-set
 fi
 
 $HOME/.local/bin/panes && $HOME/.local/bin/dunstwal 2>/dev/null
@@ -126,12 +139,12 @@ fi
 if [[ -z $(pgrep spotify) ]]; then
   spicetify apply &>/dev/null && pkill spotify
 else
-  spicetify apply &>/dev/null && pkill spotify && i3-msg 'exec --no-startup-id spotify-adblock' >/dev/null
+  spicetify apply &>/dev/null && pkill spotify && nohup spotify-adblock 2>/dev/null & disown>/dev/null
 fi
 
-if [[ -n $(pgrep polybar) ]]; then
-  $HOME/.local/bin/polyhide >/dev/null 2>/dev/null & disown
-fi
+# if [[ -n $(pgrep polybar) ]]; then
+  # sleep 1 && $HOME/.local/bin/polyhide >/dev/null 2>/dev/null & disown
+# fi
 
 kitty @ set-colors --all --configured $HOME/.config/kitty/kitty.conf
 

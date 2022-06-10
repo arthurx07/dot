@@ -1,0 +1,56 @@
+{
+	"approved" : true,
+	"contentrating" : "Everyone",
+	"description" : "Jujutsu Kaisen - Itadori Yuuji\nThe art is taken from the opening of the anime and retraced quite a bit for a higher resolution/quality.\n\n\n[list][h1]Features:[/h1]\n[*]X-Ray on Markings\n[*]3D Clock\n[*]Audio Visualizer\n[/list]\n\n\n『  Disclaimer  』\nAll Jujutsu Kaisen art is credited to their respective owner, MAPPA Studio.  I don't own any of the art, I just edited it a little and used it to animate the wallpaper for fun.  If needed, I can remove it.\n\n[img]http://i.imgur.com/pCWV5rX.png[/img]\n\nIf you liked it, rate it 5 stars.\n[img]http://i.imgur.com/Wf3GCHE.png[/img]\n\n[url=http://steamcommunity.com/id/eesbad/myworkshopfiles/?appid=730][img]http://i.imgur.com/82a3yNw.png[/img][/url]\n\n\n『 Changelog 』\nNov. 13:\n+ Updated so that you can toggle on/off the 3D clock, Audio Visualizer, X-Ray in the properties!\n[img]https://i.imgur.com/6Gk5lNj.png[/img]\nNov. 28:\n+ Added toggle for sun rays\n+ Fixed hair on electric cables\n+ Reduced active texture memory to 325, used to be 388\n- Not much can be done for the memory since xray takes a lot, you can toggle off some of the features if it lags",
+	"file" : "scene.json",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0.7372549019607844 1"
+			},
+			"toggle3dclock" : 
+			{
+				"order" : 100,
+				"text" : "Toggle 3D Clock",
+				"type" : "bool",
+				"value" : true
+			},
+			"toggleaudiovisualizer" : 
+			{
+				"order" : 101,
+				"text" : "Toggle Audio Visualizer",
+				"type" : "bool",
+				"value" : true
+			},
+			"togglesunrays" : 
+			{
+				"order" : 103,
+				"text" : "Toggle Sun Rays",
+				"type" : "bool",
+				"value" : true
+			},
+			"togglexray" : 
+			{
+				"order" : 102,
+				"text" : "Toggle XRAY",
+				"type" : "bool",
+				"value" : true
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"preview" : "preview.gif",
+	"tags" : [ "Anime" ],
+	"title" : "Jujutsu Kaisen - Itadori Yuuji (X-Ray Markings)",
+	"type" : "scene",
+	"version" : 8,
+	"visibility" : "public",
+	"workshopid" : "2262867800",
+	"workshopurl" : "steam://url/CommunityFilePage/2262867800"
+}

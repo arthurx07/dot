@@ -1,11 +1,11 @@
 [global]
     origin = top-right
-    offset = 25x20
+    offset = 30x38
 
     transparency = 10
-    frame_color = "#3B5B88"
-    frame_width = "1"
-    corner_radius = 10
+    frame_color = "#5B6562"
+    frame_width = 0
+    corner_radius = 0
 
     separator_color = "#0d0c0d"
     separator_height = 1
@@ -28,18 +28,18 @@
     monitor = 0
 
 [urgency_low]
-    foreground = "#c0cbcb"
-    background = "#0d1324"
+    foreground = "#ceccc9"
+    background = "#101212"
     ;timeout = 10
 
 [urgency_normal]
-    foreground = "#c0cbcb"
-    background = "#0d1324"
+    foreground = "#ceccc9"
+    background = "#101212"
 
 [urgency_critical]
-    background = "#0d1324"
-    foreground = "#c0cbcb"
-    frame_color = "#3B5B88"
+    background = "#101212"
+    foreground = "#ceccc9"
+    frame_color = "#5B6562"
     timeout = 10
 
 # vim: ft=cfg

@@ -1,0 +1,25 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "配音music：\n \n\n\n原画与作者信息：\n\n\n\n侵权必删，转载须注明出处及原画信息，勿做商用。\n\n\n\n[h1]  [url=https://steamuserimages-a.akamaihd.net/ugc/1666858152069537427/B2826F19FDB266BDBF9FD8ABA735A1631EDEB4AA/]\n 点击此处可微信扫码捐助[b] [/b] [/url] [/h1]\n\n生活不易，没什么收入。很需要大家的帮助！！！！！\n\nLife is not easy, income is not high. I really need your help. Even give me a gift card or a game\n\n我的邮箱地址.My email ：mengpoganbei@foxmail.com\n\n[h1]  [b][url=https://store.steampowered.com/digitalgiftcards/selectgiftcard] You can also add friends to send me a steam digital gift card (click here) [/url] [/b] [/h1]",
+	"file" : "scene.json",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"preview" : "preview.gif",
+	"tags" : [ "Anime" ],
+	"title" : "咒术回战 虎杖悠仁 Jujutsu Kaisen Itadori Yuji",
+	"type" : "Scene",
+	"version" : 0,
+	"visibility" : "public"
+}

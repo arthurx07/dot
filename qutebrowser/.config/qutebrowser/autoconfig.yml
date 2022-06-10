@@ -10,9 +10,10 @@ settings:
     https://cerveto.clickedu.eu: false
   content.notifications.enabled:
     https://coolrom.com.au: false
+    https://www.youtube.com: false
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
   statusbar.show:
-    global: never
+    global: always
   tabs.show:
-    global: never
+    global: always

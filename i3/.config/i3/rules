@@ -46,3 +46,6 @@ for_window [class="^[tT]hunar$"] floating enable
 for_window [class="^{kvantummanager,Kvantum Manager}"] floating enable, resize set 300 300
 for_window [class="kitty" floating workspace=$primary] move position center, resize set 1600 900
 for_window [class="kitty" floating workspace=$secondary] move position center, resize set 1600 900
+for_window [class="[Pp]iper"] floating enable
+for_window [class="[Aa]n-anime-game-launcher"] floating enable, move position center
+for_window [class="[Ss]system-config-printer"] floating enable, move position center

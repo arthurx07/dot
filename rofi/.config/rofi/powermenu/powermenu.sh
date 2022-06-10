@@ -61,9 +61,9 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/slimlock ]]; then
+		if [[ -f /usr/bin/light-locker ]] && [[ -f /usr/bin/light-locker-command ]]; then
             #i3lock-fancy-rapid 5 5 -e -u
-            slimlock
+            light-locker-command -l
 		fi
         ;;
     $suspend)
