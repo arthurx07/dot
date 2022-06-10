@@ -5,7 +5,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [[ $1 == "sync" ]]; then
-    emerge --sync --ask=n
+    emerge --sync --ask=n -q
 fi
 
 emerge --update --newuse --deep --ask --tree --complete-graph --verbose \
