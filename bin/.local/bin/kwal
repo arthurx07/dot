@@ -43,10 +43,10 @@ wallengineset() {
     wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/$arg >/dev/null 2>/dev/null & disown
 }
 
-lightdm-set() {
+lock-set() {
   img=$(echo $image | sed 's/\//\\\//g' )
-  sed -i "s/^image\s*=\s*\(.*\)/image=$img /g" $HOME/.local/bin/lightdm-kwal
-  doas /home/kumao/.local/bin/lightdm-kwal
+  sed -i "s/^image\s*=\s*\(.*\)/image=$img /g" $HOME/.local/bin/kwal-lock
+  doas /home/kumao/.local/bin/kwal-lock
 }
 
 if [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
@@ -79,7 +79,7 @@ if [[ $option == "-d" ]] || [[ $option == "dwall" ]] && [[ -x "$(command -v dwal
   file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
   image=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
   wpgset
-  lightdm-set
+  lock-set
 
 elif [[ $option == "-a" ]]; then
 
@@ -93,7 +93,7 @@ elif [[ $option == "-a" ]]; then
     $wpg -a $image>/dev/null
     file=`echo $image | sed 's/.*[/]//'`
     wpgset
-    lightdm-set
+    lock-set
     $wpg -d $file>/dev/null
   else
     to_convert=`ls $HOME/img/wal/$arg/preview.gif`
@@ -102,7 +102,7 @@ elif [[ $option == "-a" ]]; then
     $wpg -a $image>/dev/null
     file=`echo $image | sed 's/.*[/]//'`
     wpgset
-    lightdm-set
+    lock-set
     $wpg -d $file>/dev/null
   fi
 
@@ -111,7 +111,7 @@ elif [[ $option == "-a" ]]; then
 elif [ $# -lt 1 ]; then
   $wpg -m>/dev/null
   image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
-  lightdm-set
+  lock-set
 
 elif [[ $($wpg -l  | grep $option) == "" ]]; then
   if [[ ! -f $option ]]; then
@@ -127,7 +127,7 @@ else
   file=$option
   wpgset
   image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
-  lightdm-set
+  lock-set
 fi
 
 $HOME/.local/bin/panes && $HOME/.local/bin/dunstwal 2>/dev/null

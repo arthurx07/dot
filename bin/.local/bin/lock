@@ -2,9 +2,8 @@
 
 # Suspend dunst and lock, then resume dunst when unlocked.
 pkill -u $USER -USR1 dunst
-if [[ -f /usr/bin/light-locker ]] && [[ -f /usr/bin/light-locker-command ]]; then
-    #i3lock-fancy-rapid 5 5 -e -u
-    light-locker-command -l 
+if [[ -f /usr/bin/slock ]]; then
+  slock
 else
     exit 2
 fi

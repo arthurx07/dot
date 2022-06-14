@@ -20,15 +20,13 @@ export QT_QPA_PLATFORMTHEME=kvantum
 udiskie &
 
 # Auto Lock
-xautolock -detectsleep -time 5 -locker '$HOME/.local/bin/lock' -corners 0-0- -notify 30 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 30 seconds'" && xset dpms &
+xautolock -detectsleep -time 5 -locker '$HOME/.local/bin/lock' -notify 10 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 10 seconds'" &
 
 # Pipewire
 gentoo-pipewire-launcher & 
 
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
-
-light-locker &
 
 $HOME/.local/bin/kwal -r &
 
