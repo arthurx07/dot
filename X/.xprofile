@@ -1,7 +1,9 @@
+#!/bin/sh
 # Environment variables set everywhere
 export EDITOR="lvim"
 export TERMINAL="kitty"
 export BROWSER="qutebrowser"
+export PATH=$PATH:"$HOME/.local/bin"
 
 # XDG Paths
 export XDG_CONFIG_HOME=$HOME/.config

@@ -1,8 +1,0 @@
-#!/bin/env bash
-# Tool to make qutebrowser persistent
-
-while true; do
-  while [[ -z $(pgrep qutebrowser) ]]; do
-    qutebrowser --nowindow
-  done
-done

@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Suspend dunst and lock, then resume dunst when unlocked.
-pkill -u $USER -USR1 dunst
-if [[ -f /usr/bin/slock ]]; then
+pkill -u "$USER" -USR1 dunst
+if [ -f /usr/bin/slock ]; then
   slock
 else
     exit 2
 fi
-pkill -u $USER -USR2 dunst
+pkill -u "$USER" -USR2 dunst

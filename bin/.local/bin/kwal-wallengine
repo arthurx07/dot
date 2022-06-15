@@ -1,0 +1,24 @@
+#!/bin/sh
+M0=eDP-1
+M1=HDMI-1-0
+MUTE="--silent"
+online="$(cat /sys/class/power_supply/ADP0/online)"
+assets="--assets-dir /usr/share/linux-wallpaperengine/assets"
+
+if [ "$2" = "-u" ] || [ "$2" = "--unmute" ]; then
+  MUTE=""
+fi
+
+if [ "$online" -eq 0 ];then
+  FPS="--fps 60"
+elif [ "$online" -eq 1 ]; then
+  FPS="--fps 144"
+fi
+
+if [ "$(xrandr | grep " connected " | awk '{ print$1 }')" = "$M0" ]; then
+  SCREEN="--screen-root eDP-1"
+elif [ "$(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g')" = "$M0 $M1" ]; then
+  SCREEN="--screen-root eDP-1 --screen-root HDMI-1-0"
+fi
+
+wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/"$1" >/dev/null & disown

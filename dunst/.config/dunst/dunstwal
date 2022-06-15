@@ -1,3 +1,4 @@
+#!/bin/sh
 # get pywal colors
 color00=$(sed -n 1p ~/.cache/wal/colors)
 color01=$(sed -n 2p ~/.cache/wal/colors)
@@ -21,5 +22,5 @@ sed -i "s/background = .*/background = \"$color00\"/g" ~/.config/dunst/dunstrc
 sed -i "s/foreground = .*/foreground = \"$color07\"/g" ~/.config/dunst/dunstrc
 sed -i "s/frame_color = .*/frame_color = \"$color01\"/g" ~/.config/dunst/dunstrc
 
-pkill dunst
-dunst &
+killall dunst >/dev/null
+# dunst & >/dev/null

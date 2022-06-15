@@ -1,15 +1,15 @@
-#!/bin/env bash
+#!/bin/sh
 
 playerctl play-pause
 
-if [[ $(playerctl status) == "Stopped" ]]; then
-    if [[ $(playerctl --player=spotify status) == "Playing" ]]; then 
+if [ "$(playerctl status)" = "Stopped" ]; then
+    if [ "$(playerctl --player=spotify status)" = "Playing" ]; then 
         dunstify -h string:x-dunst-stack-tag:play-pause "   media paused" -t 2000 
-    elif [[ $(playerctl --player=spotify status) == "Paused" ]]; then
+    elif [ "$(playerctl --player=spotify status)" = "Paused" ]; then
         dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000 
     fi
-elif [[ $(playerctl status) == "Paused" ]]; then
+elif [ "$(playerctl status)" = "Paused" ]; then
     dunstify -h string:x-dunst-stack-tag:play-pause "   media paused" -t 2000 
-elif [[ $(playerctl status) == "Playing" ]]; then
+elif [ "$(playerctl status)" = "Playing" ]; then
     dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000 
 fi

@@ -1,16 +1,18 @@
-#!/bin/bash
+#!/bin/sh
+
+cd "$HOME/dot" || exit
 
 install_configs() {
-    for i in $(ls -d $HOME/dot/*/ | awk '{gsub("/home/kumao/dot/", "");print}' | awk '{gsub("gentoo/", "");print}')
+    for i in $(find "$HOME"/dot -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sed 's|gentoo||g;s|.git||g')
     do
-        stow -R $i
+        stow -R "$i"
     done
 }
 
 install_programs() {
     # add installing portage var
     emerge -avt \
-        $(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' $HOME/dot/gentoo/world)
+        "$(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' "$HOME"/dot/gentoo/world)"
 }
 
 install_overlay() {
@@ -18,41 +20,41 @@ install_overlay() {
 
     eselect repository create kumao 
 
-    for repo in $(cat $HOME/dot/gentoo/repositories); do
-        eselect repository enable $repo
-    done
+    while IFS= read -r repo; do
+        eselect repository enable "$repo"
+    done < "$HOME"/dot/gentoo/repositories
 
-    cp -r $HOME/dot/gentoo/repo/* /var/db/repos/kumao/
+    cp -r "$HOME"/dot/gentoo/repo/* /var/db/repos/kumao/
 }
 
 remove_configs() {
-    for i in $(ls -d $HOME/dot/*/ | awk '{gsub("/home/kumao/dot/", "");print}' | awk '{gsub("gentoo/", "");print}')
+    for i in $(find "$HOME"/dot -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sed 's|gentoo||g;s|.git||g')
     do
-        stow -D $i
+        stow -D "$i"
     done
 }
 
 remove_programs() {
     # add removing portage var
     emerge -aW \
-        $(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' $HOME/dot/gentoo/world) \
+        "$(awk 'BEGIN {RS=""}{gsub(/\n/," ",$0); print $0}' "$HOME"/dot/gentoo/world)" \
         --exclude app-eselect/eselect-repository && \
         emerge -cva
 }
 
 remove_overlay() {
-    for repo in $(cat $HOME/dot/gentoo/repositories); do
-        eselect repository remove $repo
-    done
+    while IFS= read -r repo; do
+        eselect repository remove "$repo"
+    done < "$HOME"/dot/gentoo/repositories
 
     emerge -aW app-eselect/eselect-repository && emerge -cva
 }
 
 help() {
-    echo -e "qdot: utility to install or remove my dotfiles
-Options: -[ i,ic,ip,io,r,rc,rp,ro ]
-          [ --install ] [ --remove ] 
-            [ -configs ]  [ -overlay ] [ -programs ]"
+  printf "qdot: utility to install or remove my dotfiles\n\
+  Options: -[ i,ic,ip,io,r,rc,rp,ro ]\n\
+  	[ --install ] [ --remove ]\n\
+	[ -configs ]  [ -overlay ] [ -programs ]\n"
 }
 case $1 in
     -i)

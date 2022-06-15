@@ -35,41 +35,42 @@
         ;; `scheme:emacs'.
         ;;
         ;; For 3.*, use `nyxt/scheme:' prefix instead.
-        #+nyxt-2 scheme:emacs
-      #+nyxt-3 nyxt/scheme:emacs
-      "C-c p" 'copy-password
-      "C-c y" 'autofill
-      "C-f"
-      #+nyxt-2 'nyxt/web-mode:history-forwards-maybe-query
-      #+nyxt-3 'nyxt/history-mode:history-forwards-maybe-query
-      "C-i" 'nyxt/input-edit-mode:input-edit-mode
-      "M-:" 'eval-expression
-      "C-s"
-      #+nyxt-2 'nyxt/web-mode:search-buffer
-      #+nyxt-3 'nyxt/search-buffer-mode:search-buffer
-      "C-x 3" 'hsplit
-      "C-x 1" 'close-all-panels
-      "C-M-'"  (construct-command insert-left-angle-quote () (insert-text "«"))
-      "C-M-\"" (construct-command insert-left-angle-quote () (insert-text "»"))
-      "C-M-hyphen" (construct-command insert-left-angle-quote () (insert-text "—"))
-      "C-M-_" (construct-command insert-left-angle-quote () (insert-text "–"))))))
+        ;;#+nyxt-2 scheme:emacs
+      ;;#+nyxt-3 nyxt/scheme:emacs
+      #+nyxt-3 nyxt/scheme:vi-normal))))
+      ;;"C-c p" 'copy-password
+      ;;"C-c y" 'autofill
+      ;;"C-f"
+      ;;#+nyxt-2 'nyxt/web-mode:history-forwards-maybe-query
+      ;;#+nyxt-3 'nyxt/history-mode:history-forwards-maybe-query
+      ;;"C-i" 'nyxt/input-edit-mode:input-edit-mode
+      ;;"M-:" 'eval-expression
+      ;;"C-s"
+      ;;#+nyxt-2 'nyxt/web-mode:search-buffer
+      ;;#+nyxt-3 'nyxt/search-buffer-mode:search-buffer
+      ;;"C-x 3" 'hsplit
+      ;;"C-x 1" 'close-all-panels
+      ;;"C-M-'"  (construct-command insert-left-angle-quote () (insert-text "«"))
+      ;;"C-M-\"" (construct-command insert-left-angle-quote () (insert-text "»"))
+      ;;"C-M-hyphen" (construct-command insert-left-angle-quote () (insert-text "—"))
+      ;;"C-M-_" (construct-command insert-left-angle-quote () (insert-text "–"))))))
 
-(define-configuration nyxt/auto-mode:auto-mode
-  ((keymap-scheme
-    (alter-keyscheme
-        %slot-default%
-        #+nyxt-2 scheme:cua
-      #+nyxt-3 nyxt/scheme:cua
-      "C-R" nil))))
+;;(define-configuration nyxt/auto-mode:auto-mode
+  ;;((keymap-scheme
+    ;;(alter-keyscheme
+        ;;%slot-default%
+        ;;#+nyxt-2 scheme:cua
+      ;;#+nyxt-3 nyxt/scheme:cua
+      ;;"C-R" nil))))
 
 ;;; Disable C-w, as it leads my Emacs muscle memory to shoot me in the foot.
 ;;;
 ;;; Shadowed by Emacs scheme's `nyxt/document-mode:cut' on 3.*.
-#+nyxt-2
-(define-configuration base-mode
-  ((keymap-scheme
-    (let ((scheme %slot-default%))
-      (keymap:define-key (gethash scheme:cua scheme)
+;;#+nyxt-2
+;;(define-configuration base-mode
+  ;;((keymap-scheme
+    ;;(let ((scheme %slot-default%))
+      ;;(keymap:define-key (gethash scheme:cua scheme)
         ;; Alternatively, bind it to nil.
-        "C-w" 'nothing)
-      scheme))))
+        ;;"C-w" 'nothing)
+      ;;scheme))))

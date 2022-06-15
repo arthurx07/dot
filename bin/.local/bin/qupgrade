@@ -1,14 +1,14 @@
-#!/bin/bash
-if [[ $EUID -ne 0 ]]; then
+#!/bin/sh
+if [ "$(id -u)" != 0 ]; then
     doas "$0" "$@"
     exit $?
 fi
 
-if [[ $1 == "sync" ]]; then
+if [ "$1" = "sync" ]; then
     emerge --sync --ask=n -q
 fi
 
-emerge --update --newuse --deep --ask --tree --complete-graph --verbose \
+emerge --update --changed-use --deep --ask --tree --complete-graph --verbose \
     --with-bdeps=y @world && \
     smart-live-rebuild --jobs=6 && \
     emerge --depclean -v --ask

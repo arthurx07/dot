@@ -1,31 +1,31 @@
-#!/bin/env bash
-light0=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
-echo -e "\n[ Current light value is $light0 ]\n"
+#!/bin/sh
+light0=$(brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)')
+printf "\n[ Current light value is %s ]\n" "$light0"
 
 if [ $# -eq 1 ]; then
-    brightnessctl s $1
-    light=`brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)'`
+    brightnessctl s "$1"
+    light=$(brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)')
 
-    if [[ $1  =~ "+" ]]; then
+    if test "${1#*+}" != "$1" ; then
         dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
-    elif [[ $1  =~ "-" ]]; then
+    elif test "${1#*-}" != "$1"; then
         dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
     fi
    
-    if [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "eDP-1 HDMI-1-0" ]];then # both eDP-1 and HDMI-1-0 connected
-      if [[ $(ddcutil detect | awk 'NR==1 {print $1}') == "Display" ]]; then
-        ddcutil setvcp --bus=$(ddcutil detect | awk 'NR==2 {print $3}' | sed 's/\/dev\/i2c-//') 10 $light
-      elif [[ $(ddcutil detect | awk 'NR==1 {print $1}') == "Invalid" ]]; then 
-        ddcutil setvcp --bus=$(ddcutil detect | awk 'NR==14 {print $3}' | sed 's/\/dev\/i2c-//') 10 $light
+    if [ "$(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g')" = "eDP-1 HDMI-1-0" ];then # both eDP-1 and HDMI-1-0 connected
+      if [ "$(ddcutil detect | awk 'NR==1 {print $1}')" = "Display" ]; then
+        ddcutil setvcp --bus="$(ddcutil detect | awk 'NR==2 {print $3}' | sed 's/\/dev\/i2c-//')" 10 "$light"
+      elif [ "$(ddcutil detect | awk 'NR==1 {print $1}')" = "Invalid" ]; then 
+        ddcutil setvcp --bus="$(ddcutil detect | awk 'NR==14 {print $3}' | sed 's/\/dev\/i2c-//')" 10 "$light"
       fi
     fi
 
-    echo -e "\n[ New light value is $light ]\n"
+    printf "\n[ New light value is %s ]\n" "$light"
 
 else
-    echo -e "Valid Values: "
-    echo -e "   specific value              Example: 500"
-    echo -e "   percentage value            Example: 50%"
-    echo -e "   specific delta              Example: 50- or +10"
-    echo -e "   percentage delta            Example: 50%- or +10%"
+    printf "Valid Values:\n\
+    specific value		Example: 500\n\
+    percentage value		Example: 50%%\n\
+    specific delta		Example: 50- or +10\n\
+    percentage delta		Example: 50%%- or +10%%\n"
 fi

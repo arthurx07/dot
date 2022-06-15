@@ -1,2 +1,0 @@
-#!/bin/bash
-i3-msg 'workspace 11; exec mpv --shuffle --pause 'https://youtube.com/playlist?list=PLZWdplz_BLqd1QNMiF6lG09X1cJLzTm-y'' 

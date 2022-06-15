@@ -1,12 +1,12 @@
-#!/bin/env bash
+#!/bin/sh
 
 if [ $# -le 2 ]; then
-    pamixer $1 $2
-    volume=`pamixer --get-volume-human`
+    pamixer "$1" "$2"
+    volume=$(pamixer --get-volume-human)
     
-    if [[ $1 -eq "-i" ]]; then
+    if [ "$1" = "-i" ]; then
         dunstify -h string:x-dunst-stack-tag:volume "   $volume" -t 2000
-    elif [[ $1 -eq "-d" ]]; then
+    elif [ "$1" = "-d" ]; then
         dunstify -h string:x-dunst-stack-tag:volume "   $volume" -t 2000
     fi
 fi

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# echo current wallpaper
+FILE=`cat $HOME/.fehbg | tail -1 | cut -d' ' -f4- | sed -r 's/(.*)-ttt(.*)/\1\2/'`
+echo $FILE

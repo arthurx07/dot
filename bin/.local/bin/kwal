@@ -1,159 +1,139 @@
-#!/bin/env bash
-# if [[ -n $(pgrep -f ${BASH_SOURCE[0]} | grep -v $$) ]]; then
-# kill -9 $(pgrep -f ${BASH_SOURCE[0]} | grep -v $$)2>/dev/null
-# fi
+#!/bin/sh
 
-if [[ -n $(pgrep wallengine) ]]; then
+if [ -n "$(pgrep wallengine)" ]; then
   killall -9 wallengine
 fi
 
-path="$HOME/img/wal/"
-wpg="/usr/bin/wpg"
-crontab -r 2>/dev/null
+if [ -x "$(command -v wal)" ] && [ -x "$(command -v wpg)" ]; then
+  WPG="$(which wpg)"
+  KWAL_LOCK="$(which kwal-lock)"
+  KWAL_ENGINE="$(which kwal-wallengine)"
+  IMG_PATH="$HOME/img/wal"
+  crontab -r 2>/dev/null
+fi
 
-wpgset() {
-  if [[ -x "$(command -v wal)" && -x "$(command -v $wpg)" ]]; then
-    $wpg -s $file>/dev/null
+setr() {
+  if [ "$1" != '-r' ]; then
+    echo $arg1 $arg2 > $HOME/.cache/kwal_current 
   fi
 }
 
-wallengineset() {
-  M0=eDP-1
-  M1=HDMI-1-0
-  MUTE="--silent"
-  online=`cat /sys/class/power_supply/ADP0/online`
-  assets="--assets-dir /usr/share/linux-wallpaperengine/assets"
-
-  if [[ $3 == "-u" ]] || [[ $3 == "--unmute" ]]; then
-    MUTE=""
-  fi
-
-  if [[ $online == 0 ]];then
-    FPS="--fps 60"
-  elif [[ $online == 1 ]]; then
-    FPS="--fps 144"
-  fi
-
-  if [[ $(xrandr | grep " connected " | awk '{ print$1 }') == $M0 ]]; then
-    SCREEN="--screen-root eDP-1"
-  elif [[ $(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/ /g') == "$M0 $M1" ]]; then 
-    SCREEN="--screen-root eDP-1 --screen-root HDMI-1-0"
-  fi
-
-    wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/$arg >/dev/null 2>/dev/null & disown
+setwpg() {
+  "$WPG" -s "$image">/dev/null
 }
 
-lock-set() {
-  img=$(echo $image | sed 's/\//\\\//g' )
-  sed -i "s/^image\s*=\s*\(.*\)/image=$img /g" $HOME/.local/bin/kwal-lock
-  doas /home/kumao/.local/bin/kwal-lock
+setwallengine() {
+  $KWAL_ENGINE "$arg2" "$3"
 }
 
-if [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
-  echo "kwal is an utility to manage your wallpaper and colorscheme with wpg \
-    [Options] \
-    kwal -h -> for help \
-    kwal ... -> for setting wallpaper \
-    kwal -r -> to set latest used wallpaper \
-    kwal -d -h -> for dwal help \
-    kwal -d ... -> for setting dynamic wallpaper"
+setlock() {
+  # [ deprecated ] lock_image=$(printf $image | sed 's/\//\\\//g') # append backslashes (\) before slashes (/) for correct sed usage 
+  # [ deprecated ] sed -i "s|^image\s*=\s*\(.*\)|image=$lock_image |g" "$KWAL_LOCK"
+  doas "$KWAL_LOCK" "$image"
+}
+
+setend() {
+  $HOME/.local/bin/color/panes
+
+  $HOME/.config/dunst/dunstwal
+
+  if [ -n "$(which kitty)" ]; then
+    kitty @ set-colors --all --configured $HOME/.config/kitty/kitty.conf
+  fi
+
+  # if [[ -z $(pgrep spotify) ]]; then
+  #   spicetify apply &>/dev/null && pkill spotify
+  # else
+  #   spicetify apply &>/dev/null && pkill spotify && spotify-adblock 2>/dev/null & disown>/dev/null
+  # fi
+
+  exit 0
+
+}
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  printf "kwal is an utility to manage your wallpaper and colorscheme with wpg \n\
+    [Options] \n\
+    kwal -h -> for help \n\
+    kwal ... -> for setting wallpaper \n\
+    kwal -r -> to set latest used wallpaper \n\
+    kwal -d -h -> for dwal help \n\
+    kwal -d ... -> for setting dynamic wallpaper\n"
   exit 0
 fi
 
-if [[ $1 == "-r" ]]; then
-  option=`awk '{print $1}' $HOME/.cache/kwal_current` 
-  arg=`awk '{print $2}' $HOME/.cache/kwal_current`
+if [ "$1" = "-r" ]; then
+  arg1="$(awk '{print $1}' $HOME/.cache/kwal_current)"
+  arg2="$(awk '{print $2}' $HOME/.cache/kwal_current)"
+elif [ $# -gt 0 ]; then
+  arg1="$1"
+  arg2="$2"
 else
-  if [[ $# -gt 0 ]]; then
-    option=$1
-    arg=$2
-  fi
+  $WPG -m>/dev/null
+  image="$HOME/dot/wal/img/wal/$("$WPG" -c)"
+  printf "$($WPG -c)\n" > "$HOME"/.cache/kwal_current
+  # [ deprecated ] sleep 1 && printf $(awk '{gsub("\047","");print $4}' $HOME/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
+  setlock
+  setend
 fi
 
-if [[ $option == "-d" ]] || [[ $option == "dwall" ]] && [[ -x "$(command -v dwall)" ]]; then
-  if [ $arg == -h ] || [ $arg == --help ]; then
+if [ "$arg1" = "-d" ] || [ "$arg1" = "dwall" ] && [ -x "$(command -v dwall)" ]; then
+
+  if [ "$arg2" = "-h" ] || [ "$arg2" = "--help" ]; then
     dwall -h
     exit 0
   fi
-  dwall -s $arg>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg") | crontab -
-  file=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
-  image=`awk '{gsub("\047","");print $4}' $HOME/.fehbg`
-  wpgset
-  lock-set
 
-elif [[ $option == "-a" ]]; then
+  dwall -s $arg2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg2") | crontab -
+  image="$(awk '{gsub("\047","");print $4}' $HOME/.fehbg)"
+  setwpg
+  setlock
 
-  if [ $arg == -h ] || [ $arg == --help ]; then
+elif [ "$arg1" = "-a" ]; then
+
+  if [ "$arg2" = -h ] || [ "$arg2" = --help ]; then
     wallengine
     exit 0
   fi
 
-  if [[ -n $(ls $HOME/img/wal/$arg/preview.jpg 2>/dev/null ) ]] || [[ -n $(ls $HOME/img/wal/$arg/preview.png 2>/dev/null ) ]]; then
-    image=`ls $HOME/img/wal/$arg/preview.jpg`
-    $wpg -a $image>/dev/null
-    file=`echo $image | sed 's/.*[/]//'`
-    wpgset
-    lock-set
-    $wpg -d $file>/dev/null
+  previewdir="$HOME/img/wal/$arg2/preview"
+  if [ -n "$(find $previewdir.jpg)" ]; then
+    image="$(find $HOME/img/wal/$arg2/preview.jpg)"
+  elif [ -n "$(find $previewdir.png)" ]; then
+    image="$(find $HOME/img/wal/$arg2/preview.png)"
   else
-    to_convert=`ls $HOME/img/wal/$arg/preview.gif`
-    ffmpeg -i $to_convert -y -vsync 0 $HOME/.cache/kwal-cache.jpg 2>/dev/null
-    image=`ls $HOME/.cache/kwal-cache.jpg`
-    $wpg -a $image>/dev/null
-    file=`echo $image | sed 's/.*[/]//'`
-    wpgset
-    lock-set
-    $wpg -d $file>/dev/null
+    image="$HOME/.cache/kwal-cache.jpg"
+    convert="$(find $HOME/img/wal/$arg/preview.gif)"
+    ffmpeg -i "$convert" -y -vsync 0 $HOME/.cache/kwal-cache.jpg 2>/dev/null
   fi
 
-  wallengineset
+  # file=`echo $image | sed 's/.*[/]//'`
+  setwpg
+  setwallengine
+  setlock
 
-elif [ $# -lt 1 ]; then
-  $wpg -m>/dev/null
-  image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
-  lock-set
+  if [ -f ""$HOME"/.cache/kwal-cache" ]; then
+    rm "$image"
+  fi
 
-elif [[ $($wpg -l  | grep $option) == "" ]]; then
-  if [[ ! -f $option ]]; then
-    echo -e "Usage: kwal path/to/image"
+elif [ -z "$("$WPG" -l  | grep "$arg1")" ]; then
+
+  if [ ! -f $option ]; then
+    printf "Usage: kwal path/to/image"
     exit 1
-  fi
-  $wpg -a $option>/dev/null
-  file=`echo $option | sed 's/.*[/]//'`
-  wpgset
-  $wpg -d $file>/dev/null
+  fi 
+
+  image="$arg1"
+  setwpg
+  setlock
 
 else
-  file=$option
-  wpgset
-  image="/home/kumao/dot/wal/img/wal/$($wpg -c)"
-  lock-set
+  image="$arg1"
+  setwpg
+  image="/home/kumao/dot/wal/img/wal/$("$WPG" -c)"
+  setlock
+
 fi
 
-$HOME/.local/bin/panes && $HOME/.local/bin/dunstwal 2>/dev/null
-
-if [[ -n $(pgrep qutebrowser) ]]; then
-  qutebrowser :config-source &>/dev/null
-fi
-
-if [[ -z $(pgrep spotify) ]]; then
-  spicetify apply &>/dev/null && pkill spotify
-else
-  spicetify apply &>/dev/null && pkill spotify && nohup spotify-adblock 2>/dev/null & disown>/dev/null
-fi
-
-# if [[ -n $(pgrep polybar) ]]; then
-  # sleep 1 && $HOME/.local/bin/polyhide >/dev/null 2>/dev/null & disown
-# fi
-
-kitty @ set-colors --all --configured $HOME/.config/kitty/kitty.conf
-
-if [[ $1 != '-r' ]]; then
-  if [[ $# -gt 0 ]]; then
-    echo $option $arg > $HOME/.cache/kwal_current
-  else
-    sleep 1 && echo $(awk '{gsub("\047","");print $4}' $HOME/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
-  fi
-fi
-
-exit 0
+setr
+setend

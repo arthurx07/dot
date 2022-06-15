@@ -1,20 +1,19 @@
-#!/bin/env bash
+#!/bin/sh
 
-if [[ $1 == kill ]] ; then
-  for i in $(pgrep --list-full bash | grep hideIt | awk '{print $1}'); do
-    kill -9 $i
+if [ "$1" = kill ] ; then
+  for i in $(pgrep --list-full bash | grep hideIt | awk '{print $1}'); do #if double-quoting $(pgrep...) it doesn't do word split, therefore it only runs once
+    kill -9 "$i"
   done
-  $HOME/.config/polybar/launch &
+  "$HOME"/.config/polybar/launch &
   exit 0
 else
-  kill -9 $(pgrep --list-full bash | grep hideIt | awk '{print $1}')
-  $HOME/.local/bin/hideIt.sh -N '^polybar-workspace_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  $HOME/.local/bin/hideIt.sh -N '^polybar-workspace_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  $HOME/.local/bin/hideIt.sh -N '^polybar-date_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  $HOME/.local/bin/hideIt.sh -N '^polybar-date_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  sleep 3 && $HOME/.local/bin/hideIt.sh -N '^polybar-sys_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  sleep 3 && $HOME/.local/bin/hideIt.sh -N '^polybar-sys_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
-  $HOME/.local/bin/hideIt.sh -N '^polybar-dock_eDP-1$' -d bottom -i 0.3 -r 0x1080+1920+-20 --peek 0 -s 30 & #+-20 if not it brokes
-  $HOME/.local/bin/hideIt.sh -N '^polybar-dock_HDMI-1-0$' -d bottom -i 0.3 -r 0x1440+4480+-20 --peek 0 -s 30 & #+-20 if not it brokes
+  kill -9 "$(pgrep --list-full bash | grep hideIt | awk '{print $1}')"
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-workspace_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-workspace_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-date_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-date_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  sleep 3 && "$HOME"/.local/bin/hideIt.sh -N '^polybar-sys_eDP-1$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  sleep 3 && "$HOME"/.local/bin/hideIt.sh -N '^polybar-sys_HDMI-1-0$' -d top -i 0.3 -r 0x0+4480+0 --peek 0 -s 30 &
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-dock_eDP-1$' -d bottom -i 0.3 -r 0x1080+1920+-20 --peek 0 -s 30 & #+-20 if not it brokes
+  "$HOME"/.local/bin/hideIt.sh -N '^polybar-dock_HDMI-1-0$' -d bottom -i 0.3 -r 0x1440+4480+-20 --peek 0 -s 30 & #+-20 if not it brokes
 fi
-
