@@ -8,13 +8,13 @@ if [ -x "$(command -v wal)" ] && [ -x "$(command -v wpg)" ]; then
   WPG="$(which wpg)"
   KWAL_LOCK="$(which kwal-lock)"
   KWAL_ENGINE="$(which kwal-wallengine)"
-  IMG_PATH="$HOME/img/wal"
+  # IMG_PATH=""$HOME"/img/wal"
   crontab -r 2>/dev/null
 fi
 
 setr() {
   if [ "$1" != '-r' ]; then
-    echo $arg1 $arg2 > $HOME/.cache/kwal_current 
+    printf "%s %s,$arg1,$arg2" > "$HOME"/.cache/kwal_current 
   fi
 }
 
@@ -33,19 +33,19 @@ setlock() {
 }
 
 setend() {
-  $HOME/.local/bin/color/panes
+  "$HOME"/.local/bin/color/panes
 
-  $HOME/.config/dunst/dunstwal
+  "$HOME"/.config/dunst/dunstwal
 
   if [ -n "$(which kitty)" ]; then
-    kitty @ set-colors --all --configured $HOME/.config/kitty/kitty.conf
+    kitty @ set-colors --all --configured "$HOME"/.config/kitty/kitty.conf
   fi
 
-  # if [[ -z $(pgrep spotify) ]]; then
-  #   spicetify apply &>/dev/null && pkill spotify
-  # else
-  #   spicetify apply &>/dev/null && pkill spotify && spotify-adblock 2>/dev/null & disown>/dev/null
-  # fi
+  if [[ -z $(pgrep spotify) ]]; then
+    spicetify apply &>/dev/null && pkill spotify
+  else
+    spicetify apply &>/dev/null && pkill spotify && nohup spotify-adblock >/dev/null 2>&1 &
+  fi
 
   exit 0
 
@@ -63,77 +63,75 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 fi
 
 if [ "$1" = "-r" ]; then
-  arg1="$(awk '{print $1}' $HOME/.cache/kwal_current)"
-  arg2="$(awk '{print $2}' $HOME/.cache/kwal_current)"
+  arg1="$(awk '{print $1}' "$HOME"/.cache/kwal_current)"
+  arg2="$(awk '{print $2}' "$HOME"/.cache/kwal_current)"
 elif [ $# -gt 0 ]; then
   arg1="$1"
   arg2="$2"
 else
   $WPG -m>/dev/null
   image="$HOME/dot/wal/img/wal/$("$WPG" -c)"
-  printf "$($WPG -c)\n" > "$HOME"/.cache/kwal_current
-  # [ deprecated ] sleep 1 && printf $(awk '{gsub("\047","");print $4}' $HOME/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
-  setlock
+  printf "$($(which wpg) -c)\n" > "$HOME"/.cache/kwal_current
+  # [ deprecated ] sleep 1 && printf $(awk '{gsub("\047","");print $4}' "$HOME"/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
+  setlock "$image"
   setend
 fi
 
 if [ "$arg1" = "-d" ] || [ "$arg1" = "dwall" ] && [ -x "$(command -v dwall)" ]; then
 
-  if [ "$arg2" = "-h" ] || [ "$arg2" = "--help" ]; then
+  if [ "$arg2" = "-h" ] || [ "$arg2" = "--help" ] || [ $# -eq 1 ]; then
     dwall -h
     exit 0
   fi
 
-  dwall -s $arg2>/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS="unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg2") | crontab -
-  image="$(awk '{gsub("\047","");print $4}' $HOME/.fehbg)"
-  setwpg
-  setlock
+  dwall -s "$arg2">/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS=\"unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e\" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg2") | crontab -
+  image="$(awk '{gsub("\047","");print $4}' "$HOME"/.fehbg)"
+  setwpg "$image"
+  setlock "$image"
 
 elif [ "$arg1" = "-a" ]; then
-
-  if [ "$arg2" = -h ] || [ "$arg2" = --help ]; then
+  if [ "$arg2" = -h ] || [ "$arg2" = --help ] || [ $# -eq 1 ]; then
     wallengine
     exit 0
   fi
 
   previewdir="$HOME/img/wal/$arg2/preview"
-  if [ -n "$(find $previewdir.jpg)" ]; then
-    image="$(find $HOME/img/wal/$arg2/preview.jpg)"
-  elif [ -n "$(find $previewdir.png)" ]; then
-    image="$(find $HOME/img/wal/$arg2/preview.png)"
+  if [ -n "$(find "$previewdir".jpg)" ]; then
+    image="$(find "$HOME"/img/wal/"$arg2"/preview.jpg)"
+  elif [ -n "$(find "$previewdir".png)" ]; then
+    image="$(find "$HOME"/img/wal/"$arg2"/preview.png)"
   else
     image="$HOME/.cache/kwal-cache.jpg"
-    convert="$(find $HOME/img/wal/$arg/preview.gif)"
-    ffmpeg -i "$convert" -y -vsync 0 $HOME/.cache/kwal-cache.jpg 2>/dev/null
+    convert="$(find "$HOME"/img/wal/"$arg2"/preview.gif)"
+    ffmpeg -i "$convert" -y -vsync 0 "$HOME"/.cache/kwal-cache.jpg 2>/dev/null
   fi
 
-  # file=`echo $image | sed 's/.*[/]//'`
-  setwpg
-  setwallengine
-  setlock
+  setwpg "$image"
+  setwallengine "$arg2" "$3"
+  setlock "$image"
 
-  if [ -f ""$HOME"/.cache/kwal-cache" ]; then
+  if [ -f """$HOME""/.cache/kwal-cache" ]; then
     rm "$image"
   fi
 
-elif [ -z "$("$WPG" -l  | grep "$arg1")" ]; then
+elif ! "$WPG" -l  | grep -q "$arg1"; then
 
-  if [ ! -f $option ]; then
-    printf "Usage: kwal path/to/image"
+  if [ ! -f "$arg1" ]; then
+    printf "Usage: kwal path/to/image\n"
     exit 1
   fi 
 
   image="$arg1"
-  setwpg
-  setlock
+  setwpg "$image"
+  setlock "$image"
 
 else
   image="$arg1"
-  setwpg
+  setwpg "$image"
   image="/home/kumao/dot/wal/img/wal/$("$WPG" -c)"
-  setlock
+  setlock "$image"
 
 fi
 
-setr
+setr "$1" "$arg1" "$arg2"
 setend

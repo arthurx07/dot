@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$(id -u)" != 0 ]; then
+    doas "$0" "$@"
+    exit $?
+fi
+
+image=$1
+img_lock="/usr/share/backgrounds/kwal"
+
+cp $image $img_lock
+
+if [ -x "$(command -v magick )" ]; then
+  magick convert $img_lock -gravity center -crop 16:9 $img_lock
+fi
+
+# not necessary, left for documentation purposes
+# img=$(echo $image | sed 's/\//\\\//g' )
+# sed -i "s/^background\s*=\s*\(.*\)/background=$img /g" /etc/lightdm/lightdm-gtk-greeter.conf

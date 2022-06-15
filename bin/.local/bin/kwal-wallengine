@@ -21,4 +21,4 @@ elif [ "$(xrandr | grep " connected " | awk '{ print$1 }' | sed ':a;N;$!ba;s/\n/
   SCREEN="--screen-root eDP-1 --screen-root HDMI-1-0"
 fi
 
-wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/"$1" >/dev/null & disown
+nohup wallengine $assets $SCREEN $FPS $MUTE $HOME/img/wal/"$1" >/dev/null 2>&1 &
