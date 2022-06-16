@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/dash
 
-if [ -n "$(pgrep wallengine)" ]; then
+while pgrep wallengine >/dev/null; do
   killall -9 wallengine
-fi
+done
 
 if [ -x "$(command -v wal)" ] && [ -x "$(command -v wpg)" ]; then
   WPG="$(which wpg)"
@@ -33,18 +33,32 @@ setlock() {
 }
 
 setend() {
+  if pgrep dwm >/dev/null; then
+    xdotool key super+shift+r
+  else
+    until pgrep dwm >/dev/null;do
+      sleep 0.5
+      if pgrep dwm >/dev/null; then
+        xdotool key super+shift+r
+        break
+      fi
+    done
+  fi
+      
   "$HOME"/.local/bin/color/panes
 
   "$HOME"/.config/dunst/dunstwal
 
-  if [ -n "$(which kitty)" ]; then
+  if which kitty >/dev/null; then
     kitty @ set-colors --all --configured "$HOME"/.config/kitty/kitty.conf
   fi
 
-  if [[ -z $(pgrep spotify) ]]; then
-    spicetify apply &>/dev/null && pkill spotify
+  if ! pgrep spotify >/dev/null; then
+    spicetify apply -n >/dev/null && pkill spotify
   else
-    spicetify apply &>/dev/null && pkill spotify && nohup spotify-adblock >/dev/null 2>&1 &
+    killall -9 spotify
+    spicetify apply -n >/dev/null
+    nohup spotify-adblock >/dev/null 2>&1 &
   fi
 
   exit 0
@@ -96,9 +110,9 @@ elif [ "$arg1" = "-a" ]; then
   fi
 
   previewdir="$HOME/img/wal/$arg2/preview"
-  if [ -n "$(find "$previewdir".jpg)" ]; then
+  if find "$previewdir".jpg >/dev/null; then
     image="$(find "$HOME"/img/wal/"$arg2"/preview.jpg)"
-  elif [ -n "$(find "$previewdir".png)" ]; then
+  elif find "$previewdir".png >/dev/null; then
     image="$(find "$HOME"/img/wal/"$arg2"/preview.png)"
   else
     image="$HOME/.cache/kwal-cache.jpg"

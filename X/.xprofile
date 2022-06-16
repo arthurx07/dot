@@ -30,6 +30,7 @@ gentoo-pipewire-launcher &
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
 
+xdotool key super+shift+r &
 $HOME/.local/bin/kwal -r &
 
 xrdb -merge $HOME/.Xresources &
