@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 while pgrep wallengine >/dev/null; do
   killall -9 wallengine
@@ -33,17 +33,7 @@ setlock() {
 }
 
 setend() {
-  if pgrep dwm >/dev/null; then
-    xdotool key super+shift+r
-  else
-    until pgrep dwm >/dev/null;do
-      sleep 0.5
-      if pgrep dwm >/dev/null; then
-        xdotool key super+shift+r
-        break
-      fi
-    done
-  fi
+  xdotool key super+shift+r
       
   "$HOME"/.local/bin/color/panes
 

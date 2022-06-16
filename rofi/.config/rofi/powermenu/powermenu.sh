@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 ## Author  : Aditya Shakya
 ## Mail    : adi1090x@gmail.com
@@ -23,7 +23,7 @@ confirm_exit() {
 		-i\
 		-no-fixed-num-lines\
 		-p "Are You Sure? : "\
-		-theme $dir/confirm.rasi
+		-theme "$dir"/confirm.rasi
 }
 
 # Message
@@ -34,63 +34,59 @@ msg() {
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
-chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
+chosen="$(printf "%s,$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
 case $chosen in
-    $shutdown)
+    "$shutdown")
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			#systemctl poweroff
-        killall qutebrowser
-		doas poweroff
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+		if [ "$ans" = "yes" ] || [ "$ans" = "YES" ] || [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+			doas poweroff
+		elif [ "$ans" = "no" ] || [ "$ans" = "NO" ] || [ "$ans" = "n" ] || [ "$ans" = "N" ]; then
 			exit 0
         else
 			msg
         fi
         ;;
-    $reboot)
+    "$reboot")
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			#systemctl reboot
-        killall qutebrowser
-		doas reboot
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+		if [ "$ans" = "yes" ] || [ "$ans" = "YES" ] || [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+			doas reboot
+		elif [ "$ans" = "no" ] || [ "$ans" = "NO" ] || [ "$ans" = "n" ] || [ "$ans" = "N" ]; then
 			exit 0
         else
 			msg
         fi
         ;;
-    $lock)
-		if [[ -f /usr/bin/light-locker ]] && [[ -f /usr/bin/light-locker-command ]]; then
-            #i3lock-fancy-rapid 5 5 -e -u
-            light-locker-command -l
+    "$lock")
+		if [ -f /usr/bin/slock ] && [ -f "$HOME/.local/bin/lock" ] ; then
+            		"$HOME"/.local/bin/lock
 		fi
         ;;
-    $suspend)
+    "$suspend")
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			mpc -q pause
-			amixer set Master mute
+		if [ "$ans" = "yes" ] || [ "$ans" = "YES" ] || [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+			# mpc -q pause
+			# amixer set Master mute	
+			if [ -f "$HOME"/.local/bin/mute ]; then
+				"$HOME"/.local/bin/mute
+			fi
 			playerctl stop
+			if [ -f /usr/bin/slock ] && [ -f "$HOME/.local/bin/lock" ] ; then
+            			"$HOME"/.local/bin/lock
+			fi
       loginctl suspend
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+		elif [ "$ans" = "no" ] || [ "$ans" = "NO" ] || [ "$ans" = "n" ] || [ "$ans" = "N" ]; then
 			exit 0
         else
 			msg
         fi
         ;;
-    $logout)
+    "$logout")
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			#if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-			#	openbox --exit
-			#elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-			#	bspc quit
-			#elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-            killall qutebrowser
-				i3-msg exit
-			#fi
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+		if [ "$ans" = "yes" ] || [ "$ans" = "YES" ] || [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+			if [ "$DESKTOP_SESSION" = "dwm" ]; then
+				xdotool key super+shift+BackSpace
+			fi
+		elif [ "$ans" = "no" ] || [ "$ans" = "NO" ] || [ "$ans" = "n" ] || [ "$ans" = "N" ]; then
 			exit 0
         else
 			msg
