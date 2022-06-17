@@ -57,8 +57,8 @@ case $chosen in
         fi
         ;;
     "$lock")
-		if [ -f /usr/bin/slock ] && [ -f "$HOME/.local/bin/lock" ] ; then
-            		"$HOME"/.local/bin/lock
+		if [ -f /usr/bin/slock ] ; then
+      slock &
 		fi
         ;;
     "$suspend")
@@ -70,8 +70,8 @@ case $chosen in
 				"$HOME"/.local/bin/mute
 			fi
 			playerctl stop
-			if [ -f /usr/bin/slock ] && [ -f "$HOME/.local/bin/lock" ] ; then
-            			"$HOME"/.local/bin/lock
+			if [ -f /usr/bin/slock ] ; then
+        slock &
 			fi
       loginctl suspend
 		elif [ "$ans" = "no" ] || [ "$ans" = "NO" ] || [ "$ans" = "n" ] || [ "$ans" = "N" ]; then

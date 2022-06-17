@@ -1,8 +1,8 @@
 #!/bin/sh
 # Environment variables set everywhere
-export EDITOR="lvim"
+export EDITOR="vim"
 export TERMINAL="kitty"
-export BROWSER="qutebrowser"
+export BROWSER="nyxt"
 export PATH=$PATH:"$HOME/.local/bin"
 
 # XDG Paths

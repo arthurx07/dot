@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if pgrep -n xautolock >/dev/null; then
+  kill "$(pgrep xautolock)"
+fi
+
+xautolock -detectsleep -time 5 -locker "loginctl suspend" >/dev/null 2>&1 &
+
+slock &
+
+while true; do
+  sleep 5
+  if ! pgrep -n slock >/dev/null; then
+    kill "$(pgrep xautolock)" &&\
+      xautolock -detectsleep -time 5 -locker "$(which lock)" -notify 10 -notifier "notify-send -u critical -t 10000 -- '   locking screen in 10 seconds'" >/dev/null 2>&1 &
+    exit 0
+  fi
+done

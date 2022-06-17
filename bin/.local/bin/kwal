@@ -1,7 +1,7 @@
 #!/bin/sh
 
 while pgrep wallengine >/dev/null; do
-  killall -9 wallengine
+  killall -9 wallengine 2>&1 &
 done
 
 if [ -x "$(command -v wal)" ] && [ -x "$(command -v wpg)" ]; then
@@ -14,7 +14,7 @@ fi
 
 setr() {
   if [ "$1" != '-r' ]; then
-    printf "%s %s,$arg1,$arg2" > "$HOME"/.cache/kwal_current 
+    printf "%s %s\n" "$arg1" "$arg2" > "$HOME"/.cache/kwal_current 
   fi
 }
 
@@ -23,13 +23,13 @@ setwpg() {
 }
 
 setwallengine() {
-  $KWAL_ENGINE "$arg2" "$3"
+  $KWAL_ENGINE "$arg2" "$3" 2>&1 &
 }
 
 setlock() {
   # [ deprecated ] lock_image=$(printf $image | sed 's/\//\\\//g') # append backslashes (\) before slashes (/) for correct sed usage 
   # [ deprecated ] sed -i "s|^image\s*=\s*\(.*\)|image=$lock_image |g" "$KWAL_LOCK"
-  doas "$KWAL_LOCK" "$image"
+  doas "$KWAL_LOCK" "$image" 2>&1 &
 }
 
 setend() {
@@ -49,6 +49,10 @@ setend() {
     killall -9 spotify
     spicetify apply -n >/dev/null
     nohup spotify-adblock >/dev/null 2>&1 &
+  fi
+
+  if [ "$(which mouse-led)" != "" ]; then
+    mouse-led color 2>&1 &
   fi
 
   exit 0
@@ -75,7 +79,7 @@ elif [ $# -gt 0 ]; then
 else
   $WPG -m>/dev/null
   image="$HOME/dot/wal/img/wal/$("$WPG" -c)"
-  printf "$($(which wpg) -c)\n" > "$HOME"/.cache/kwal_current
+  printf "%s\n" "$($(which wpg) -c)" > "$HOME"/.cache/kwal_current
   # [ deprecated ] sleep 1 && printf $(awk '{gsub("\047","");print $4}' "$HOME"/.fehbg | sed 's/\/home\/kumao\/.config\/wpg\/wallpapers\///g') > $HOME/.cache/kwal_current
   setlock "$image"
   setend
@@ -83,7 +87,7 @@ fi
 
 if [ "$arg1" = "-d" ] || [ "$arg1" = "dwall" ] && [ -x "$(command -v dwall)" ]; then
 
-  if [ "$arg2" = "-h" ] || [ "$arg2" = "--help" ] || [ $# -eq 1 ]; then
+  if [ "$arg2" = "-h" ] || [ "$arg2" = "--help" ] || [ $# -eq 1 ] && [ "$1" != "-r" ]; then
     dwall -h
     exit 0
   fi
@@ -94,7 +98,7 @@ if [ "$arg1" = "-d" ] || [ "$arg1" = "dwall" ] && [ -x "$(command -v dwall)" ]; 
   setlock "$image"
 
 elif [ "$arg1" = "-a" ]; then
-  if [ "$arg2" = -h ] || [ "$arg2" = --help ] || [ $# -eq 1 ]; then
+  if [ "$arg2" = -h ] || [ "$arg2" = --help ] || [ $# -eq 1 ] && [ "$1" != "-r" ]; then
     wallengine
     exit 0
   fi
