@@ -7,8 +7,8 @@ if [ "$1" = color ]; then
       ratbagctl "$(ratbagctl | awk '{print $1}' | tr -d ":")" profile 0 led "$i" set color "$color"
     done
     fi
-elif [ "$(ratbagctl singing-gundi profile active get)" -eq 0 ]; then
-  ratbagctl singing-gundi profile active set 1
+elif [ "$(ratbagctl "$(ratbagctl | awk '{print $1}' | tr -d ":")" profile active get)" -eq 0 ]; then
+  ratbagctl "$(ratbagctl | awk '{print $1}' | tr -d ":")" profile active set 1
 else
-  ratbagctl singing-gundi profile active set 0
+  ratbagctl "$(ratbagctl | awk '{print $1}' | tr -d ":")" profile active set 0
 fi

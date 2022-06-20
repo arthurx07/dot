@@ -4,10 +4,10 @@ PRIV="$(command -v doas)"
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 
 # lunarvim
-alias nvimrc='$ZDOTDIR/zsh-lvim-padding ~/.config/nvim/'
-alias vi='$ZDOTDIR/zsh-lvim-padding'
-alias lvim='$ZDOTDIR/zsh-lvim-padding'
-alias nvim='$ZDOTDIR/zsh-lvim-padding'
+# alias nvimrc='$ZDOTDIR/zsh-lvim-padding ~/.config/nvim/'
+# alias vi='$ZDOTDIR/zsh-lvim-padding'
+# alias lvim='$ZDOTDIR/zsh-lvim-padding'
+# alias nvim='$ZDOTDIR/zsh-lvim-padding'
 # alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
 
 # Colorize grep output (good for log files)
@@ -54,7 +54,7 @@ alias ls="exa -lgh --group-directories-first"
 alias la="exa -lgha --group-directories-first"
 
 alias nvimsu="${PRIV} /usr/bin/nvim"
-alias v='$ZDOTDIR/zsh-lvim-padding'
+# alias v='$ZDOTDIR/zsh-lvim-padding'
 alias py="python"
 alias clock="tty-clock"
 alias qb="qutebrowser"

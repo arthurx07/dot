@@ -1,15 +1,24 @@
 #!/bin/sh
 
-playerctl play-pause
-
-if [ "$(playerctl status)" = "Stopped" ]; then
-    if [ "$(playerctl --player=spotify status)" = "Playing" ]; then 
-        dunstify -h string:x-dunst-stack-tag:play-pause "   media paused" -t 2000 
-    elif [ "$(playerctl --player=spotify status)" = "Paused" ]; then
-        dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000 
-    fi
-elif [ "$(playerctl status)" = "Paused" ]; then
+if [ "$(playerctl --player=spotify status)" = "Playing" ]; then
+  playerctl --player=spotify play-pause
+  if [ "$(playerctl --player=spotify status)" = "Playing" ]; then 
     dunstify -h string:x-dunst-stack-tag:play-pause "   media paused" -t 2000 
-elif [ "$(playerctl status)" = "Playing" ]; then
-    dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000 
+  fi
+
+else
+  spoti_statusa="$(playerctl --player=spotify status)"
+  playerctl play-pause 
+  sleep 0.1 && spoti_statusb="$(playerctl --player=spotify status)"
+  if [ $spoti_statusa = $spoti_statusb ]; then 
+    if [ "$(playerctl status)" = "Paused" ]; then 
+      dunstify -h string:x-dunst-stack-tag:play-pause "   media paused" -t 2000  
+    elif [ "$(playerctl status)" = "Playing" ]; then 
+      dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000
+    fi
+  else
+    dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000
+  fi
 fi
+# if [ "$(playerctl --player=spotify status)" = "Paused" ]; then 
+#   dunstify -h string:x-dunst-stack-tag:play-pause "   media played" -t 2000 

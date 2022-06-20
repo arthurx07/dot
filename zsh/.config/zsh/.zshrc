@@ -85,12 +85,12 @@ autoload edit-command-line; zle -N edit-command-line
 xset r rate 280 40
 
 # Environment variables set everywhere
-export EDITOR="nvim"
-export TERMINAL="kitty"
-export BROWSER="qutebrowser"
+# export EDITOR="nvim"
+# export TERMINAL="kitty"
+# export BROWSER="qutebrowser"
 
 # For QT Themes
-export QT_QPA_PLATFORMTHEME=qt5ct
+# export QT_QPA_PLATFORMTHEME=qt5ct
 
 # remap caps to escape
 # setxkbmap -option caps:escape

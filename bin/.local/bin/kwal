@@ -19,7 +19,7 @@ setr() {
 }
 
 setwpg() {
-  "$WPG" -s "$image">/dev/null
+  "$WPG" -s $image >/dev/null 2>&1 &
 }
 
 setwallengine() {
@@ -33,22 +33,22 @@ setlock() {
 }
 
 setend() {
-  xdotool key super+shift+r
+  sleep 0.5 && xdotool key super+shift+r
       
   "$HOME"/.local/bin/color/panes
 
   "$HOME"/.config/dunst/dunstwal
 
-  if which kitty >/dev/null; then
-    kitty @ set-colors --all --configured "$HOME"/.config/kitty/kitty.conf
-  fi
+  # if which kitty >/dev/null; then
+  #   kitty @ set-colors --all --configured "$HOME"/.config/kitty/kitty.conf
+  # fi
 
   if ! pgrep spotify >/dev/null; then
     spicetify apply -n >/dev/null && pkill spotify
   else
     killall -9 spotify
     spicetify apply -n >/dev/null
-    nohup spotify-adblock >/dev/null 2>&1 &
+    nohup spotify-adblock >/dev/null 2>&1 & sleep 0.5 && xdotool key super+shift+comma
   fi
 
   if [ "$(which mouse-led)" != "" ]; then
@@ -94,7 +94,7 @@ if [ "$arg1" = "-d" ] || [ "$arg1" = "dwall" ] && [ -x "$(command -v dwall)" ]; 
 
   dwall -s "$arg2">/dev/null && (crontab -l 2>/dev/null; echo "0 * * * * env SHELL=/bin/zsh PATH=/home/kumao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib/llvm/13/bin DISPLAY=:0.0 DBUS_SESSION_BUS_ADDRESS=\"unix:abstract=/tmp/dbus-mcNZtBEmYP,guid=ef019eb66962b2ba4b08e27b6273fd3e\" XDG_RUNTIME_DIR=/run/user/1000 /home/kumao/.local/bin/kwal -d $arg2") | crontab -
   image="$(awk '{gsub("\047","");print $4}' "$HOME"/.fehbg)"
-  setwpg "$image"
+  setwpg $image
   setlock "$image"
 
 elif [ "$arg1" = "-a" ]; then
@@ -125,7 +125,7 @@ elif [ "$arg1" = "-a" ]; then
 elif ! "$WPG" -l  | grep -q "$arg1"; then
 
   if [ ! -f "$arg1" ]; then
-    printf "Usage: kwal path/to/image\n"
+    printf "Usage: kwal absolute/path/to/image\n"
     exit 1
   fi 
 
@@ -136,7 +136,7 @@ elif ! "$WPG" -l  | grep -q "$arg1"; then
 else
   image="$arg1"
   setwpg "$image"
-  image="/home/kumao/dot/wal/img/wal/$("$WPG" -c)"
+  sleep 0.5 && image="/home/kumao/dot/wal/img/wal/$("$WPG" -c)"
   setlock "$image"
 
 fi

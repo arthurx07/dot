@@ -1,0 +1,4 @@
+// Set kitty default background color.
+* {{
+  background: {#101317}
+}}

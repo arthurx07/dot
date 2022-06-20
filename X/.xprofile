@@ -1,6 +1,6 @@
 #!/bin/sh
 # Environment variables set everywhere
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="nyxt"
 export PATH=$PATH:"$HOME/.local/bin"
@@ -30,8 +30,11 @@ gentoo-pipewire-launcher &
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
 
+# wallpaper and colorscheme
 $HOME/.local/bin/kwal -r &
 
-xrdb -merge $HOME/.Xresources &
-
+# compositor
 picom &
+
+# status bar
+slstatus &
