@@ -22,10 +22,22 @@ if [ $# -eq 1 ]; then
 
     printf "\n[ New light value is %s ]\n" "$light"
 
+elif [ "$2" = "secondary" ]; then
+    brightnessctl s "$1"
+    echo "$1"
+    light=$(brightnessctl | awk 'NR == 2 {print $4}' | tr -d '(%)')
+
+    if test "${1#*+}" != "$1" ; then
+        dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
+    elif test "${1#*-}" != "$1"; then
+        dunstify -h string:x-dunst-stack-tag:light "   $light%" -t 2000
+    fi
+
 else
     printf "Valid Values:\n\
     specific value		Example: 500\n\
     percentage value		Example: 50%%\n\
     specific delta		Example: 50- or +10\n\
     percentage delta		Example: 50%%- or +10%%\n"
+    exit 1
 fi

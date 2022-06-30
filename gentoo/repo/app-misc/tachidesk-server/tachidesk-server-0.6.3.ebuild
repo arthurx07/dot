@@ -5,8 +5,8 @@ EAPI=8
 
 DESCRIPTION="A free and open source manga reader that runs extensions built for Tachiyomi."
 HOMEPAGE="https://github.com/Suwayomi/Tachidesk-Server"
-FNAME="Tachidesk-Server-v$PV-r1087-linux-x64"
-SRC_URI="https://github.com/Suwayomi/Tachidesk-Server/releases/download/v$PV/$FNAME.tar.gz -> $PN.tar.gz"
+FNAME="Tachidesk-Server-v$PV-r1100-linux-x64"
+SRC_URI="https://github.com/Suwayomi/Tachidesk-Server/releases/download/v$PV/$FNAME.tar.gz"
 
 LICENSE="MPL-2"
 SLOT="0"
@@ -15,6 +15,7 @@ IUSE="+electron"
 
 DEPEND="
 	virtual/jre
+	dev-java/openjdk-bin:11
 	"
 RDEPEND="${DEPEND}"
 BDEPEND=""

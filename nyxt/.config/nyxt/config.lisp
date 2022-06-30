@@ -4,3 +4,5 @@
   (nyxt-config-file filename))
 
 (load (nyxt-config-file "init.lisp"))
+
+;; load init.lisp file

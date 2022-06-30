@@ -48,7 +48,7 @@ setend() {
   else
     killall -9 spotify
     spicetify apply -n >/dev/null
-    nohup spotify-adblock >/dev/null 2>&1 & sleep 0.5 && xdotool key super+shift+comma
+    nohup spotify-adblock >/dev/null 2>&1 &
   fi
 
   if [ "$(which mouse-led)" != "" ]; then

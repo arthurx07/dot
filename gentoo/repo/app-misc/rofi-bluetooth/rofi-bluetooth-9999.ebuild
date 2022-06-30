@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 PATCHES=(
-	"${FILESDIR}/${PN}-rofi-bluetooth.patch"
+ 	"${FILESDIR}/${PN}-rofi-bluetooth.patch"
 )
 
 src_install() {

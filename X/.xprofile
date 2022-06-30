@@ -34,7 +34,7 @@ export ZDOTDIR=$HOME/.config/zsh
 $HOME/.local/bin/kwal -r &
 
 # compositor
-picom &
+picom -b &
 
 # status bar
 slstatus &
