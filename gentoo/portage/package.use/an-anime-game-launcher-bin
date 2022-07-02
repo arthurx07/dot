@@ -1,0 +1,47 @@
+# package.use
+
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=dev-util/xdelta-3.0.11 lzma
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[sdl]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=media-libs/libsdl2-2.0.20-r1 haptic
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[unwind]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=sys-libs/libunwind-1.6.2 abi_x86_32
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[vulkan]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=media-libs/vulkan-loader-1.3.204 abi_x86_32
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[gecko]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=app-emulation/wine-gecko-2.47.2 abi_x86_32
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[usb]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=virtual/libusb-1-r2 abi_x86_32
+# required by virtual/libusb-1-r2::gentoo
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo[usb]
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by an-anime-game-launcher-bin (argument)
+>=dev-libs/libusb-1.0.24-r2 abi_x86_32
+# disable libunwind wine fo an-anime-game-launcher
+app-emulation/wine-vanilla -unwind
+# required by sys-fs/udev-250::gentoo
+# required by virtual/libudev-232-r7::gentoo[-systemd]
+# required by media-libs/libsdl2-2.0.20-r1::gentoo
+# required by app-emulation/wine-vanilla-7.0-r2::gentoo
+# required by virtual/wine-0-r7::gentoo
+# required by games-misc/an-anime-game-launcher-bin-2.3.3::The-Anime-Game
+# required by @selected
+# required by @world (argument)
+>=sys-apps/systemd-utils-250.6 abi_x86_32

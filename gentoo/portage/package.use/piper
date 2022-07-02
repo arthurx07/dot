@@ -1,0 +1,61 @@
+# package.use
+# required by net-misc/curl-7.79.1::gentoo[http2]
+# required by dev-lang/rust-1.58.1::gentoo
+# required by virtual/rust-1.58.1::gentoo
+# required by gnome-base/librsvg-2.52.6::gentoo
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=net-libs/nghttp2-1.45.1-r1 abi_x86_32
+# required by sys-devel/gettext-0.21-r1::gentoo
+# required by sys-libs/pam-1.5.1_p20210622-r1::gentoo
+# required by sys-apps/util-linux-2.37.4::gentoo[pam]
+# required by sys-fs/udev-249.6-r2::gentoo
+# required by virtual/libudev-232-r5::gentoo[-systemd]
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=virtual/libintl-0-r2 abi_x86_32
+# required by sys-fs/udev-249.6-r2::gentoo
+# required by virtual/libudev-232-r5::gentoo[-systemd]
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=sys-libs/libcap-2.63 abi_x86_32
+# required by sys-libs/libcap-2.63::gentoo[pam]
+# required by sys-fs/udev-249.6-r2::gentoo
+# required by virtual/libudev-232-r5::gentoo[-systemd]
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=sys-libs/pam-1.5.1_p20210622-r1 abi_x86_32
+# required by gnome-base/librsvg-2.52.6::gentoo
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=virtual/rust-1.58.1 abi_x86_32
+# required by virtual/rust-1.58.1::gentoo
+# required by gnome-base/librsvg-2.52.6::gentoo
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-lang/rust-1.58.1 abi_x86_32
+# required by media-libs/tiff-4.3.0::gentoo[jpeg]
+# required by x11-libs/gdk-pixbuf-2.42.6-r1::gentoo[tiff]
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=virtual/jpeg-100 abi_x86_32
+# required by virtual/jpeg-100::gentoo
+# required by media-libs/tiff-4.3.0::gentoo[jpeg]
+# required by x11-libs/gdk-pixbuf-2.42.6-r1::gentoo[tiff]
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libjpeg-turbo-2.1.1-r2 abi_x86_32
+# required by media-libs/harfbuzz-3.2.0::gentoo[truetype]
+# required by gnome-base/librsvg-2.52.6::gentoo
+# required by app-misc/piper-0.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/freetype-2.11.0-r1 abi_x86_32 

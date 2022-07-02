@@ -1,0 +1,12 @@
+# package.use
+
+media-sound/pulseaudio -alsa-plugin jack
+# required by media-sound/pulseaudio-15.0-r1::gentoo[alsa,alsa-plugin]
+# required by pulseaudio (argument)
+>=media-plugins/alsa-plugins-1.2.2 pulseaudio
+# required by media-sound/pulseaudio-16.0::gentoo
+# required by dev-qt/qtmultimedia-5.15.4-r1::gentoo[pulseaudio]
+# required by media-video/obs-studio-27.2.4::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libpulse-16.0 abi_x86_32

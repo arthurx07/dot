@@ -1,0 +1,3 @@
+# package.use
+# for installing retroarch
+games-emulation/retroarch -sdl rgui xrandr vulkan xmb materialui

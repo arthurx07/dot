@@ -1,0 +1,9 @@
+# package.use
+# required by gnustep-base/gnustep-make-2.8.0::gentoo
+# required by gnustep-base/gnustep-base-1.27.0-r1::gentoo
+# required by app-arch/unar-1.10.7::gentoo
+# required by unar (argument)
+>=sys-devel/gcc-11.2.1_p20220115 objc
+# required by app-arch/unar-1.10.7::gentoo
+# required by unar (argument)
+>=gnustep-base/gnustep-make-2.8.0 native-exceptions

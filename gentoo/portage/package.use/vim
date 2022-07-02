@@ -1,0 +1,4 @@
+# package.use
+# required by app-vim/vim-latex-1.10.0-r2::gentoo
+# required by vim-latex (argument)
+>=app-editors/vim-8.2.4328-r1 python

@@ -1,0 +1,4 @@
+# package.use
+# required by net-vpn/riseup-vpn-0.21.11::gentoo
+# required by riseup-vpn (argument)
+>=dev-qt/qtquickcontrols2-5.15.3 widgets

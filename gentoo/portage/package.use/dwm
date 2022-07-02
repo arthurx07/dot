@@ -1,0 +1,2 @@
+# package.use
+x11-wm/dwm xinerama -savedconfig

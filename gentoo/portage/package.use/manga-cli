@@ -1,0 +1,5 @@
+# package.use
+
+# required by media-gfx/img2pdf-0.4.3::gentoo[python_targets_python3_9,-test,gui]
+# required by img2pdf (argument)
+>=dev-lang/python-3.9.12:3.9 tk

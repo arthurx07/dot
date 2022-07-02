@@ -1,0 +1,6 @@
+# package.use
+
+# required by mpv-plugin/mpv-mpris-0.7.1-r1::guru
+# required by app-misc/trackma-9999::kumao[mpv]
+# required by trackma (argument)
+>=media-video/mpv-0.34.1-r1 cplugins libmpv

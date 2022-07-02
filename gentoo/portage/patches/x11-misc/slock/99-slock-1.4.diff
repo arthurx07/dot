@@ -1,0 +1,14 @@
+diff --git a/config.def.h b/config.def.h
+index b4bcb10..bcccba7 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -29,7 +29,7 @@ static const int timetocancel = 4;
+ static const char *pam_service = "login";
+ 
+ /* allow control key to trigger fail on clear */
+-static const int controlkeyclear = 0;
++static const int controlkeyclear = 1;
+ 
+ /* Background image path, should be available to the user above */
+-static const char* background_image = "";
++static const char* background_image = "/usr/share/backgrounds/kwal";

@@ -1,0 +1,171 @@
+# required for steam
+#*/*::steam-overlay
+games-util/steam-client-meta ~amd64
+games-util/steam-launcher ~amd64
+games-util/steam-meta ~amd64
+games-util/game-device-udev-rules ~amd64
+
+# required for bat (a modern alternative to cat)
+sys-apps/bat ~amd64
+
+# required for i3lock 
+x11-misc/i3lock-fancy-rapid ~amd64
+
+# required for gotop
+sys-process/gotop ~amd64
+
+# required for nvtop
+sys-process/nvtop ~amd64
+
+# required by piper
+app-misc/piper ~amd64
+dev-libs/libratbag ~amd64
+
+# pdf in qutebrowser
+www-plugins/pdfjs ~amd64
+
+# changing brightness external monitors
+app-misc/ddcutil
+
+# tty-clock
+app-misc/tty-clock ~amd64
+
+# python debugger
+dev-python/pudb ~amd64
+dev-python/urwid_readline ~amd64
+
+# lutris
+games-util/lutris ~amd64
+
+# imv photo viewer
+media-gfx/imv ~amd64
+
+# rust plugin for vim
+app-vim/rust-vim ~amd64 
+
+# picom, stable packages don't have
+# essential functionalities
+x11-misc/picom ~amd64
+
+# ani-cli
+app-misc/ani-cli ~amd64
+
+# rofi-bluetooth
+app-misc/rofi-bluetooth ~amd64
+
+# yuzu
+=games-emulation/yuzu-9999 **
+dev-libs/libfmt ~amd64
+media-libs/cubeb ~amd64
+
+# spotify-adblock
+media-sound/spotify-adblock ~amd64
+
+# brightnessctl
+app-misc/brightnessctl ~amd64
+
+# pfetch
+app-misc/pfetch ~amd64
+
+# cpufetch
+app-misc/cpufetch ~amd64
+
+# obs-studio
+media-video/obs-studio ~amd64
+
+# minecraft-launcher
+games-action/minecraft-launcher ~amd64
+dev-libs/libffi ~amd64
+
+# github-cli
+dev-util/github-cli ~amd64
+
+# pamixer
+media-sound/pamixer ~amd64
+
+# spdlog
+dev-libs/spdlog ~amd64 # stable package is broken
+
+# gentooLTO
+sys-config/ltoize ~amd64
+app-portage/lto-rebuild ~amd64
+
+# wallset
+app-misc/wallset ~amd64
+
+# dynamic wallpaper
+app-misc/dynamic-wallpaper ~amd64
+
+# cava
+media-sound/cava ~amd64
+
+# envycontrol
+x11-misc/envycontrol ~amd64
+
+# hidamari
+dev-python/pydbus ~amd64
+
+# riseup-vpn
+net-vpn/riseup-vpn
+
+# neovim (required by lunarvim)
+#app-editors/neovim ~amd64
+
+# kvantum
+x11-themes/kvantum ~amd64
+
+# to check hardware acceleration usage
+x11-apps/igt-gpu-tools ~amd64
+
+# llvm --> using masked ebuild to be able to disable unnecessary llvm_targets
+# sys-devel/llvm ~amd64
+# sys-devel/llvmgold ~amd64
+# sys-devel/clang ~amd64
+
+# wpgtk - pywal git
+app-misc/wpgtk ~amd64
+app-misc/pywal ~amd64
+
+# element matrix client
+www-apps/element ~amd64 # server?
+net-im/element-desktop-bin ~amd64 # desktop client?
+
+# scan with brother printer
+media-gfx/brscan4
+
+# wallpaper-engine
+app-misc/linux-wallpaperengine ~amd64
+
+# light-locker
+x11-misc/light-locker ~amd64
+
+# genshin impact anime-game-launcher
+games-misc/an-anime-game-launcher-bin ~amd64
+app-emulation/dxvk-bin ~amd64
+
+# nyxt
+www-client/nyxt ~amd64
+sys-libs/libfixposix ~amd64
+
+# manga-cli
+app-misc/manga-cli ~amd64
+media-gfx/img2pdf ~amd64
+
+# discord-bin
+net-im/discord-bin ~amd64
+
+# dmenu-bluetooth
+app-misc/dmenu-bluetooth ~amd64
+
+# app-misc/trackma [ anime / manga tracker ]
+app-misc/trackma ~amd64
+mpv-plugin/mpv-mpris ~amd64
+
+# plan9
+dev-util/plan9port ~amd64
+
+# catgirl irc client
+net-irc/catgirl ~amd64
+
+# simple rss and atom parser
+net-news/sfeed ~amd64

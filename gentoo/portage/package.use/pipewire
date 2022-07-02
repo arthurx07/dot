@@ -1,0 +1,8 @@
+# package.use
+media-video/pipewire echo-cancel pipewire-alsa jack-sdk
+# required by virtual/jack-2::gentoo
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-plugins/alsa-plugins-1.2.2::gentoo[pulseaudio]
+# required by media-video/pipewire-0.3.49-r1::gentoo[-pipewire-alsa]
+# required by pipewire (argument)
+>=media-sound/jack2-1.9.19 abi_x86_32

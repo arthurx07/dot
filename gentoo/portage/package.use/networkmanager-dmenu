@@ -1,0 +1,2 @@
+# package.use
+app-misc/networkmanager-dmenu -dmenu rofi

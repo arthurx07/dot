@@ -1,0 +1,22 @@
+diff --git a/dmenu.c b/dmenu.c
+index 0db43eb..56509d8 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -399,6 +399,17 @@ keypress(XKeyEvent *ev)
+ 		case XK_k: ksym = XK_Prior; break;
+ 		case XK_l: ksym = XK_Down;  break;
+ 		case XK_Tab: ksym = XK_Up;  break;
++		case XK_Return:
++		case XK_KP_Enter:
++			// puts((sel && !(ev->state & ShiftMask)) ? "kitty --hold argument" : text);
++			printf("kitty --hold %s", sel->text);
++			if (!(ev->state & ControlMask)) {
++				cleanup();
++				exit(0);
++			}
++			if (sel)
++				sel->out = 1;
++			break;
+ 		default:
+ 			return;
+ 		}

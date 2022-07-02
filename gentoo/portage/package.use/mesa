@@ -1,0 +1,12 @@
+# package.use
+# required by x11-libs/libdrm-2.4.109::gentoo[video_cards_intel]
+# required by media-libs/mesa-21.3.5::gentoo
+# required by @selected
+# required by @world (argument)
+>=x11-libs/libpciaccess-0.16-r1 abi_x86_32
+media-libs/mesa -vaapi -vdpau # I have an intel cpu, mesa won't use them
+# required by media-libs/mesa-22.0.3::gentoo[vaapi]
+# required by media-video/mpv-0.33.1-r3::gentoo[egl]
+# required by @selected
+# required by @world (argument)   
+>=x11-libs/libva-2.14.0 abi_x86_32

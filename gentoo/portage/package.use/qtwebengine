@@ -1,0 +1,2 @@
+# package.use
+sys-libs/zlib minizip # required by dev-qt/qtwebengine

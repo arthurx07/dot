@@ -1,0 +1,8 @@
+# package.use
+# required by games-emulation/yuzu-9999::kumao
+# required by yuzu::kumao (argument)
+>=dev-libs/boost-1.78.0-r2 context
+# required by games-emulation/yuzu-9999::kumao
+# required by yuzu::kumao (argument)
+>=net-libs/mbedtls-2.28.0-r1 cmac
+games-emulation/yuzu discord system-vulkan webengine

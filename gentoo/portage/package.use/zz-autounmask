@@ -1,0 +1,10 @@
+# package.use [ zz-autounmask ]
+
+sys-devel/clang -llvm-libunwind
+sys-process/htop -llvm-libunwind
+# required by sys-libs/libcxx-13.0.1::gentoo
+# required by sys-devel/clang-13.0.1::gentoo[default-libcxx]
+# required by @selected
+# required by @world (argument)
+>=sys-libs/libcxxabi-13.0.1 libunwind
+x11-terms/st savedconfig

@@ -3,7 +3,7 @@
     offset = 30x30
 
     transparency = 10
-    frame_color = "#4C8ED4"
+    frame_color = "#5D5362"
     frame_width = 0
     corner_radius = 0
 
@@ -28,18 +28,18 @@
     monitor = 0
 
 [urgency_low]
-    foreground = "#cfe1ec"
-    background = "#1e242d"
+    foreground = "#d4d6d9"
+    background = "#090709"
     ;timeout = 10
 
 [urgency_normal]
-    foreground = "#cfe1ec"
-    background = "#1e242d"
+    foreground = "#d4d6d9"
+    background = "#090709"
 
 [urgency_critical]
-    background = "#1e242d"
-    foreground = "#cfe1ec"
-    frame_color = "#4C8ED4"
+    background = "#090709"
+    foreground = "#d4d6d9"
+    frame_color = "#5D5362"
     timeout = 10
 
 # vim: ft=cfg

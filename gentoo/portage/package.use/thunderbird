@@ -1,0 +1,8 @@
+# package.use
+mail-client/thunderbird lto hwaccel system-png eme-free
+# required by mail-client/thunderbird-91.9.0::gentoo[system-libvpx]
+# required by thunderbird (argument)
+>=media-libs/libvpx-1.11.0 postproc
+# required by mail-client/thunderbird-91.9.0::gentoo[system-png]
+# required by thunderbird (argument)
+>=media-libs/libpng-1.6.37-r2 apng

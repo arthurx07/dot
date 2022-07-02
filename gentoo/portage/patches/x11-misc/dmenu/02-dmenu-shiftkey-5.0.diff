@@ -1,0 +1,60 @@
+From 7955d695d0f53277c87e818a82bf79aff48114f2 Mon Sep 17 00:00:00 2001
+From: kumao <arturleivarx@gmail.com>
+Date: Wed, 15 Jun 2022 13:09:57 +0200
+Subject: [PATCH] applied shiftkey patch
+
+---
+ dmenu.c | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/dmenu.c b/dmenu.c
+index 2e1fb56..0db43eb 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -335,7 +335,15 @@ keypress(XKeyEvent *ev)
+ 		case XK_f: ksym = XK_Right;     break;
+ 		case XK_g: ksym = XK_Escape;    break;
+ 		case XK_h: ksym = XK_BackSpace; break;
+-		case XK_i: ksym = XK_Tab;       break;
++		case XK_Tab: ksym = XK_Up;  break;
++		case XK_i:
++			if (!sel)
++				return;
++                        strncpy(text, sel->text, sizeof text - 1);
++                        text[sizeof text - 1] = '\0';
++                        cursor = strlen(text);
++                        match();
++                        break;
+ 		case XK_j: /* fallthrough */
+ 		case XK_J: /* fallthrough */
+ 		case XK_m: /* fallthrough */
+@@ -390,6 +398,7 @@ keypress(XKeyEvent *ev)
+ 		case XK_j: ksym = XK_Next;  break;
+ 		case XK_k: ksym = XK_Prior; break;
+ 		case XK_l: ksym = XK_Down;  break;
++		case XK_Tab: ksym = XK_Up;  break;
+ 		default:
+ 			return;
+ 		}
+@@ -482,20 +491,13 @@ keypress(XKeyEvent *ev)
+ 		if (lines > 0)
+ 			return;
+ 		/* fallthrough */
++	case XK_Tab:
+ 	case XK_Down:
+ 		if (sel && sel->right && (sel = sel->right) == next) {
+ 			curr = next;
+ 			calcoffsets();
+ 		}
+ 		break;
+-	case XK_Tab:
+-		if (!sel)
+-			return;
+-		strncpy(text, sel->text, sizeof text - 1);
+-		text[sizeof text - 1] = '\0';
+-		cursor = strlen(text);
+-		match();
+-		break;
+ 	}
+ 
+ draw:

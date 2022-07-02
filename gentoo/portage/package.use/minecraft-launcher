@@ -1,0 +1,96 @@
+# package.use
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=net-misc/curl-7.79.1-r1 adns
+# required by net-misc/curl-7.79.1-r1::gentoo[adns]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=net-dns/c-ares-1.17.2 abi_x86_32
+# required by media-video/pipewire-0.3.50-r1::gentoo[pipewire-alsa]
+# required by virtual/jack-2::gentoo
+# required by media-libs/openal-1.21.1-r2::gentoo[jack]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/alsa-lib-1.2.4 abi_x86_32
+# required by media-libs/libsdl2-2.0.20-r1::gentoo[pulseaudio]
+# required by media-sound/mpg123-1.29.3::gentoo[sdl]
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+>=media-sound/pulseaudio-15.0-r2 abi_x86_32
+# required by media-libs/openal-1.21.1-r2::gentoo[sdl]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libsdl2-2.0.20-r1 abi_x86_32
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-libs/libsndfile-1.1.0-r1 abi_x86_32
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+>=media-libs/speexdsp-1.2.0 abi_x86_32
+# required by media-sound/pulseaudio-15.0-r2::gentoo[asyncns]
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+>=net-libs/libasyncns-0.8-r4 abi_x86_32
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-libs/flac-1.3.4 abi_x86_32
+# required by media-libs/libvorbis-1.3.7::gentoo
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-libs/libogg-1.3.5 abi_x86_32
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-libs/libvorbis-1.3.7 abi_x86_32
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-libs/opus-1.3.1-r2 abi_x86_32
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-sound/mpg123-1.29.3::gentoo[pulseaudio]
+>=media-sound/lame-3.100-r3 abi_x86_32
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-libs/libsdl2-2.0.20-r1::gentoo[pulseaudio]
+# required by media-libs/openal-1.21.1-r2::gentoo[sdl]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-sound/mpg123-1.29.3 abi_x86_32
+# required by media-libs/openal-1.21.1-r2::gentoo[jack]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=virtual/jack-2 abi_x86_32
+# required by media-libs/libsdl2-2.0.20-r1::gentoo[opengl]
+# required by media-sound/mpg123-1.29.3::gentoo[sdl]
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-libs/openal-1.21.1-r2::gentoo[pulseaudio]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=virtual/glu-9.0-r2 abi_x86_32
+# required by virtual/glu-9.0-r2::gentoo
+# required by media-libs/libsdl2-2.0.20-r1::gentoo[opengl]
+# required by media-sound/mpg123-1.29.3::gentoo[sdl]
+# required by media-libs/libsndfile-1.1.0-r1::gentoo[-minimal]
+# required by media-sound/pulseaudio-15.0-r2::gentoo
+# required by media-libs/openal-1.21.1-r2::gentoo[pulseaudio]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/glu-9.0.2 abi_x86_32
+# required by media-libs/libsdl2-2.0.20-r1::gentoo[pipewire]
+# required by media-libs/openal-1.21.1-r2::gentoo[sdl]
+# required by games-action/minecraft-launcher-1121::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-video/pipewire-0.3.49-r1 abi_x86_32

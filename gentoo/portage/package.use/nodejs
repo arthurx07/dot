@@ -1,0 +1,3 @@
+# package.use
+# for installing npm
+net-libs/nodejs npm
